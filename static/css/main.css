@@ -4,15 +4,16 @@ html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address
 @font-face{font-family:"Open Sans";src:local("Open Sans Light"),local("OpenSans-Light"),url("../fonts/opensans/OpenSans-Light.woff") format("woff")}
 
 /* Module */
-html, body, .list, .map{height: 100%;}
+html, body{height: 100%;overflow:hidden;}
 body{
   color: #333333;
   font-family:"Open Sans";
   font-size: 1em;
 }
-
+.list, .map{height: 100%;}
 .list{
   background: rgba(255,255,255,.7);
+  overflow: auto;
   position: absolute;
   width: 25%;
   z-index: 1;
@@ -35,12 +36,12 @@ body{
   margin-left: 160px;
   padding: 5px 0;
 }
-.list ul li img{
-  border-bottom: 1px solid #999;
+.list .image{
   float: left;
   margin-right: 10px;
   max-height: 100px;
-  max-width: 150px;
+  text-align: center;
+  width: 150px;
 }
 .map{
   position: absolute;

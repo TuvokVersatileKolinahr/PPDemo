@@ -16,7 +16,9 @@
 			<h2 class="header">Search</h2>
 			<ul>
 				<li class="clearfix" ng-repeat="property in properties">
-					<img ng-src="{{property.PhotoPhileRef}}" alt="{{property.Code}}" />
+					<div class="image">
+						<img ng-src="{{property.PhotoPhileRef}}" alt="{{property.Code}}" />
+					</div>
 					<p>{{property.Code}}</p>
 					<p>{{property.Name}}</p>
 				</li>
