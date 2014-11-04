@@ -12,9 +12,18 @@ body{
 }
 
 .list{
-  background: rgba(255,255,255,.8);
-  float: left;
+  background: rgba(255,255,255,.7);
+  position: absolute;
   width: 25%;
+  z-index: 1;
+}
+.list h2{
+  background-color: rgba(255,255,255,.9);
+  box-shadow: 0 0 3px #999;
+  font-size: 1.2em;
+  font-style: bold;
+  padding: 10px 0;
+  text-align: center;
 }
 .list ul li{
   border-bottom: 1px solid #999999;
@@ -31,6 +40,10 @@ body{
   margin-right: 10px;
   max-height: 50px;
   max-width: 50px;
+}
+.map{
+  position: absolute;
+  width: 100%;
 }
 
 .clearfix:after{

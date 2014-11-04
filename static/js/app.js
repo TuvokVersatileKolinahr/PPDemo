@@ -15,8 +15,9 @@ var app = angular.module('propertypassport', [])
 	  /* Init maps */
 	  function initialize() {
         var mapOptions = {
-          center: { lat: 52.2573142, lng: 6.0717659},
-          zoom: 8
+          center: { lat: 51.5873617, lng: 4.7663469},
+          zoom: 15,
+          disableDefaultUI: true
         };
         var map = new google.maps.Map(document.getElementById('map-canvas'),
             mapOptions);
