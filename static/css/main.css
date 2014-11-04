@@ -32,14 +32,15 @@ body{
   padding: 5px;
 }
 .list ul li p {
+  margin-left: 160px;
   padding: 5px 0;
 }
 .list ul li img{
   border-bottom: 1px solid #999;
   float: left;
   margin-right: 10px;
-  max-height: 50px;
-  max-width: 50px;
+  max-height: 100px;
+  max-width: 150px;
 }
 .map{
   position: absolute;

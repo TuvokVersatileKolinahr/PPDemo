@@ -1,27 +1,27 @@
 [
 	{
-		"Code"			: "Baggerweg Scheveningen",
-		"Name"			: "OBJ0371",
+		"Code"			: "Waalse Kerk",
+		"Name"			: "OBJ5249",
 		"PhotoPhileRef"	: "static/img/castle.jpg"
 	},
 	{
-		"Code"			: "Baggerweg Scheveningen",
-		"Name"			: "OBJ0371",
-		"PhotoPhileRef"	: "static/img/castle.jpg"
+		"Code"			: "Holland Casino",
+		"Name"			: "OBJ3518",
+		"PhotoPhileRef"	: "static/img/castle1.jpg"
 	},
 	{
-		"Code"			: "Baggerweg Scheveningen",
-		"Name"			: "OBJ0371",
-		"PhotoPhileRef"	: "static/img/castle.jpg"
+		"Code"			: "Generaal Maczek Museum",
+		"Name"			: "OBJ3618",
+		"PhotoPhileRef"	: "static/img/castle2.jpg"
 	},
 	{
-		"Code"			: "Baggerweg Scheveningen",
-		"Name"			: "OBJ0371",
-		"PhotoPhileRef"	: "static/img/castle.jpg"
+		"Code"			: "Kasteel van Breda",
+		"Name"			: "OBJ7952",
+		"PhotoPhileRef"	: "static/img/castle3.jpg"
 	},
 	{
-		"Code"			: "Baggerweg Scheveningen",
-		"Name"			: "OBJ0371",
-		"PhotoPhileRef"	: "static/img/castle.jpg"
+		"Code"			: "Nassau Wallon",
+		"Name"			: "OBJ1112",
+		"PhotoPhileRef"	: "static/img/castle4.jpg"
 	}
 ]
