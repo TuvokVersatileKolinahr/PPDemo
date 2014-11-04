@@ -5,7 +5,7 @@ html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address
 
 /* Module */
 html, body{height: 100%;overflow:hidden;}
-body{
+body, input, textarea, select{
   color: #333333;
   font-family:"Open Sans";
   font-size: 1em;
@@ -18,13 +18,24 @@ body{
   width: 25%;
   z-index: 1;
 }
-.list h2{
+.list .header{
   background-color: rgba(255,255,255,.9);
   box-shadow: 0 0 3px #999;
-  font-size: 1.2em;
-  font-style: bold;
-  padding: 10px 0;
+  padding: 10px 0 2px;
   text-align: center;
+}
+.list .header h2{
+  border-bottom: 1px dotted #999999;
+  font-size: 1.2em;
+  padding-bottom: 10px;
+}
+.list .header .filter-label{
+  color: #999999;
+  width: 20%;
+}
+.list .header .filter{
+  border: none;
+  width: 80%;
 }
 .list ul li{
   border-bottom: 1px solid #999999;

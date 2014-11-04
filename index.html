@@ -13,9 +13,14 @@
 		<header class="top clearfix"></header>
 
 		<section class="list">
-			<h2 class="header">Search</h2>
+			<div class="header">	
+				<h2 >Search</h2>
+			
+				<label class="filter-label" for="filter">Filter:</label>
+			    <input type="text" ng-model="filter" id="filter" class="filter"/>
+			</div>
 			<ul>
-				<li class="clearfix" ng-repeat="property in properties">
+				<li class="clearfix" ng-repeat="property in properties | filter:filter">
 					<div class="image">
 						<img ng-src="{{property.PhotoPhileRef}}" alt="{{property.Code}}" />
 					</div>
