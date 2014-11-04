@@ -12,21 +12,20 @@
 		<!-- Controls -->
 		<header class="top clearfix"></header>
 
-		<section>
-			<div class="list">
-				<ul>
-					<li ng-repeat="property in properties">
-						<img src="{{property.PhotoPhileRef}}" alt="{{property.Code}}" />
-						<p>{{property.Code}}</p>
-						<p>{{property.Name}}</p>
-					</li>
-			</div>
-			<div class="map">
+		<section class="list">
+			<ul>
+				<li class="clearfix" ng-repeat="property in properties">
+					<img ng-src="{{property.PhotoPhileRef}}" alt="{{property.Code}}" />
+					<p>{{property.Code}}</p>
+					<p>{{property.Name}}</p>
+				</li>
+		</section>
+		<section class="map" id="map-canvas">
 
-			</div>
 		</section>
 
 		<script src='static/js/vendor/angularjs/1.3.0/angular.min.js'></script>
 		<script src='static/js/app.js'></script>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMFGTIvS385CKvB7J8FC5cBala85M9FLQ"></script>
 	</body>
 </html>
