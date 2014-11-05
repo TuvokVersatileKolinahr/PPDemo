@@ -17,7 +17,7 @@ var app = angular.module('propertypassport', [])
       });
 
       if (marker){
-        map.setCenter(marker.getPosition());
+        map.panTo(marker.getPosition());
         //map.setZoom(18);
         $scope.properties.forEach(function(p){
           if (p.code === marker.id){
