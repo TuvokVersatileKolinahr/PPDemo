@@ -6,8 +6,9 @@ var app = angular.module('propertypassport', [])
     /**
      * Zoom to a marker with a specific ID on the map
      * @param string The id of the marker
+     * @return google.maps.Marker the selected marker or undefined when not found
      */
-    $scope.zoomToMarker = function(id){
+    $scope.selectMarker = function(id){
       var marker;
       markers.forEach(function(m){
         if (m.id == id){
@@ -17,9 +18,24 @@ var app = angular.module('propertypassport', [])
 
       if (marker){
         map.setCenter(marker.getPosition());
-        map.setZoom(18);
+        //map.setZoom(18);
+        $scope.properties.forEach(function(p){
+          if (p.code === marker.id){
+            $scope.selected = p;
+          }
+        });
+        console.log('Zoom to marker ' + id);
       }
+      return marker;
     };
+    $scope.selectMarkerWithInfo = function(id){
+      if ($scope.selectMarker(id)){
+        $scope.showInfo = !$scope.showInfo;
+      }
+    }
+    $scope.clear = function(){
+      $scope.showInfo = false;
+    }
 
     // Get the data from the server...
     $http.get('static/js/mock.js').
@@ -32,15 +48,23 @@ var app = angular.module('propertypassport', [])
         var property = $scope.properties[t];
         var marker = new google.maps.Marker({
           position: new google.maps.LatLng(property.comment.split(",")[0], property.comment.split(",")[1]),
-          id: property.code, // set the ID for lookup purposes, @see zoomToMarker
+          id: property.code, // set the ID for lookup purposes, @see selectMarker
           title: property.name,
           map: map
         });
         markers.push(marker);
 
-        google.maps.event.addListener(marker, 'click', function() {               
-          // TODO select the property in the list
-        });
+        // wrap inside a closure to keep reference to the right marker...
+        (function(marker){
+          google.maps.event.addListener(marker, 'click', function() {               
+            // TODO select the property in the list
+            // show side panel
+            $scope.$apply(function(){
+              $scope.showInfo = true;
+              $scope.selectMarker(marker.id);
+            });
+          });
+        })(marker);
         
       }
 

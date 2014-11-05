@@ -20,7 +20,7 @@
         <input type="text" ng-model="filter" id="filter" class="filter"/>
       </div>
       <ul>
-        <li class="clearfix" ng-repeat="property in properties | filter:filter" id="{{property.code}}" ng-click="zoomToMarker(property.code)">
+        <li class="clearfix" ng-repeat="property in properties | filter:filter" id="{{property.code}}" ng-dblclick="selectMarkerWithInfo(property.code);" ng-click="selectMarker(property.code)">
           <div class="image">
             <img ng-src="{{property.PhotoPhileRef}}" alt="{{property.code}}" />
           </div>
@@ -31,16 +31,16 @@
       </ul>
     </section>
 
-    <section class="card">
+    <section class="card" ng-class="{open : showInfo}">
     <div class="card_handle">
-      <img src="static/img/drag_handle.png">
+      <a href="#" ng-click="clear()" class="close">&times;</a>
     </div>
       <div class="card_content">
         <div class="header">
           <h2>Info</h2>
         </div>
-        <h3>Title</h3>
-        <img src="http://placekitten.com/g/300/200" alt="" />
+        <h3>{{selected.code}}</h3>
+        <img ng-src="{{selected.PhotoPhileRef}}" alt="{{selected.code}}" />
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint natus itaque ex laborum praesentium soluta velit repudiandae deserunt magni ut dolorem obcaecati labore voluptatem reiciendis placeat tempora nisi ab laboriosam.</p>
       </div>
     </section>

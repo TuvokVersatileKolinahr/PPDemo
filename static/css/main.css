@@ -20,9 +20,23 @@ body, input, textarea, select{
   margin-left: 99%;
   transition: all 0.5s ease;
 }
-.card:hover {
+.card.open {
   background-color: rgba(255,255,255,.9);
   margin-left: 75%;
+}
+.card .close{
+  display: none;
+}
+.card.open .close{
+  display: inline;
+  font-size: 1.1em;
+  opacity: .5;
+  padding-left: 4px;
+  text-decoration: none;
+  transition: all .3s ease-out 0s;
+}
+.card .close:hover{
+  opacity: 1;
 }
 .card .header{
   background-color: rgba(255,255,255,.9);
@@ -44,19 +58,16 @@ body, input, textarea, select{
   float: left;
   position: absolute;
 }
-.card .card_handle img{
-  margin-left: auto;
-  margin-right: auto;
-  width: 18px;
-}
 .card .card_content{
   margin-left: auto;
   margin-right: 0;
+  padding-right: 10px;
   width: 95%;
 }
 .card .card_content img{
   margin-left: auto;
   margin-right: auto;
+  max-height: 250px;
   width: 100%;
 }
 .list{
