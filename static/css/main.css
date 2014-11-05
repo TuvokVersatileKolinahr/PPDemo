@@ -101,6 +101,7 @@ body, input, textarea, select{
   color: #666666;
   cursor: pointer;
   padding: 5px;
+  list-style-type: none;
 }
 .list ul li.active{
   background: rgba(29, 65, 155, .6);
@@ -121,7 +122,6 @@ body, input, textarea, select{
   position: absolute;
   width: 100%;
 }
-
 .clearfix:after{
   content: ".";
   display: block;
@@ -129,4 +129,51 @@ body, input, textarea, select{
   visibility: hidden;
   line-height: 0;
   height: 0;
+}
+.chart {
+  font: 10px sans-serif;
+}
+
+.chart rect {
+  fill: steelblue;
+}
+
+.chart text {
+  fill: white;
+  font: 10px sans-serif;
+  text-anchor: end;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+.graph-svg-component {
+    background-color: AliceBlue;
+}
+path {
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: none;
+}
+ 
+line {
+    stroke: black;
+}
+ 
+text {
+    font-family: Arial;
+    font-size: 9pt;
+}
+.visuals {
+  height: 400px;
+  width: 100%;
 }
