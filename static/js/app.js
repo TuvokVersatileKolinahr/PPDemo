@@ -30,7 +30,6 @@ var app = angular.module('propertypassport', [])
 
       for (var t = 0; t < data.result.length; t++) {
         var property = $scope.properties[t];
-        
         var marker = new google.maps.Marker({
           position: new google.maps.LatLng(property.comment.split(",")[0], property.comment.split(",")[1]),
           id: property.code, // set the ID for lookup purposes, @see zoomToMarker
