@@ -22,10 +22,11 @@
 			<ul>
 				<li class="clearfix" ng-repeat="property in properties | filter:filter">
 					<div class="image">
-						<img ng-src="{{property.PhotoPhileRef}}" alt="{{property.Code}}" />
+						<img ng-src="{{property.PhotoPhileRef}}" alt="{{property.code}}" />
 					</div>
-					<p>{{property.Code}}</p>
-					<p>{{property.Name}}</p>
+					<p>{{property.code}}</p>
+					<p>{{property.name}}</p>
+					<p>{{property.comment}}</p>
 				</li>
 		</section>
 		<section class="map" id="map-canvas">

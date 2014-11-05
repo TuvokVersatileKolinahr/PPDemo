@@ -1,152 +1,16 @@
-[
-	{
-		"Code"			: "Waalse Kerk",
-		"Name"			: "OBJ5249",
-		"PhotoPhileRef"	: "static/img/castle.jpg"
-	},
-	{
-		"Code"			: "Holland Casino",
-		"Name"			: "OBJ3518",
-		"PhotoPhileRef"	: "static/img/castle1.jpg"
-	},
-	{
-		"Code"			: "Generaal Maczek Museum",
-		"Name"			: "OBJ3618",
-		"PhotoPhileRef"	: "static/img/castle2.jpg"
-	},
-	{
-		"Code"			: "Kasteel van Breda",
-		"Name"			: "OBJ7952",
-		"PhotoPhileRef"	: "static/img/castle3.jpg"
-	},
-	{
-		"Code"			: "Nassau Wallon",
-		"Name"			: "OBJ1112",
-		"PhotoPhileRef"	: "static/img/castle4.jpg"
-	},
-	{
-		"Code"			: "Waalse Kerk",
-		"Name"			: "OBJ5249",
-		"PhotoPhileRef"	: "static/img/castle.jpg"
-	},
-	{
-		"Code"			: "Holland Casino",
-		"Name"			: "OBJ3518",
-		"PhotoPhileRef"	: "static/img/castle1.jpg"
-	},
-	{
-		"Code"			: "Generaal Maczek Museum",
-		"Name"			: "OBJ3618",
-		"PhotoPhileRef"	: "static/img/castle2.jpg"
-	},
-	{
-		"Code"			: "Kasteel van Breda",
-		"Name"			: "OBJ7952",
-		"PhotoPhileRef"	: "static/img/castle3.jpg"
-	},
-	{
-		"Code"			: "Nassau Wallon",
-		"Name"			: "OBJ1112",
-		"PhotoPhileRef"	: "static/img/castle4.jpg"
-	},
-	{
-		"Code"			: "Waalse Kerk",
-		"Name"			: "OBJ5249",
-		"PhotoPhileRef"	: "static/img/castle.jpg"
-	},
-	{
-		"Code"			: "Holland Casino",
-		"Name"			: "OBJ3518",
-		"PhotoPhileRef"	: "static/img/castle1.jpg"
-	},
-	{
-		"Code"			: "Generaal Maczek Museum",
-		"Name"			: "OBJ3618",
-		"PhotoPhileRef"	: "static/img/castle2.jpg"
-	},
-	{
-		"Code"			: "Kasteel van Breda",
-		"Name"			: "OBJ7952",
-		"PhotoPhileRef"	: "static/img/castle3.jpg"
-	},
-	{
-		"Code"			: "Nassau Wallon",
-		"Name"			: "OBJ1112",
-		"PhotoPhileRef"	: "static/img/castle4.jpg"
-	},
-	{
-		"Code"			: "Waalse Kerk",
-		"Name"			: "OBJ5249",
-		"PhotoPhileRef"	: "static/img/castle.jpg"
-	},
-	{
-		"Code"			: "Holland Casino",
-		"Name"			: "OBJ3518",
-		"PhotoPhileRef"	: "static/img/castle1.jpg"
-	},
-	{
-		"Code"			: "Generaal Maczek Museum",
-		"Name"			: "OBJ3618",
-		"PhotoPhileRef"	: "static/img/castle2.jpg"
-	},
-	{
-		"Code"			: "Kasteel van Breda",
-		"Name"			: "OBJ7952",
-		"PhotoPhileRef"	: "static/img/castle3.jpg"
-	},
-	{
-		"Code"			: "Nassau Wallon",
-		"Name"			: "OBJ1112",
-		"PhotoPhileRef"	: "static/img/castle4.jpg"
-	},
-	{
-		"Code"			: "Waalse Kerk",
-		"Name"			: "OBJ5249",
-		"PhotoPhileRef"	: "static/img/castle.jpg"
-	},
-	{
-		"Code"			: "Holland Casino",
-		"Name"			: "OBJ3518",
-		"PhotoPhileRef"	: "static/img/castle1.jpg"
-	},
-	{
-		"Code"			: "Generaal Maczek Museum",
-		"Name"			: "OBJ3618",
-		"PhotoPhileRef"	: "static/img/castle2.jpg"
-	},
-	{
-		"Code"			: "Kasteel van Breda",
-		"Name"			: "OBJ7952",
-		"PhotoPhileRef"	: "static/img/castle3.jpg"
-	},
-	{
-		"Code"			: "Nassau Wallon",
-		"Name"			: "OBJ1112",
-		"PhotoPhileRef"	: "static/img/castle4.jpg"
-	},
-	{
-		"Code"			: "Waalse Kerk",
-		"Name"			: "OBJ5249",
-		"PhotoPhileRef"	: "static/img/castle.jpg"
-	},
-	{
-		"Code"			: "Holland Casino",
-		"Name"			: "OBJ3518",
-		"PhotoPhileRef"	: "static/img/castle1.jpg"
-	},
-	{
-		"Code"			: "Generaal Maczek Museum",
-		"Name"			: "OBJ3618",
-		"PhotoPhileRef"	: "static/img/castle2.jpg"
-	},
-	{
-		"Code"			: "Kasteel van Breda",
-		"Name"			: "OBJ7952",
-		"PhotoPhileRef"	: "static/img/castle3.jpg"
-	},
-	{
-		"Code"			: "Nassau Wallon",
-		"Name"			: "OBJ1112",
-		"PhotoPhileRef"	: "static/img/castle4.jpg"
-	}
-]
+  {  
+  	"id": "0",
+    "result":[
+     {
+      "code": "OBJ0000378",
+      "comment": "51.5880552,4.7772214",
+      "name": "Cafe de Baron z'n vriendin",
+      "PhotoPhileRef" : "static/img/castle.jpg"
+     },{
+      "code": "OBJ0000380",
+      "comment": "51.5876085,4.7761217",
+      "name": "Kasteel van Breda",
+      "PhotoPhileRef" : "static/img/castle1.jpg"
+     }
+    ]
+  }
