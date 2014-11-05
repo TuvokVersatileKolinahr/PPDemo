@@ -102,6 +102,10 @@ body, input, textarea, select{
   cursor: pointer;
   padding: 5px;
 }
+.list ul li.active{
+  background: rgba(29, 65, 155, .6);
+  color: #fff;
+}
 .list ul li p {
   margin-left: 160px;
   padding: 5px 0;
