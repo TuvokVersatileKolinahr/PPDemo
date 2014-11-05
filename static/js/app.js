@@ -9,7 +9,7 @@ var app = angular.module('propertypassport', [])
 	   	console.log('Got ' + $scope.properties.length + ' properties');
 
       for (var t = 0; t < data.result.length; t++) {
-        console.log("comment", data.result[t].comment.split(","));
+        // console.log("comment", data.result[t].comment.split(","));
         var marker = new google.maps.Marker({
           position: new google.maps.LatLng(data.result[t].comment.split(",")[0], data.result[t].comment.split(",")[1]),
           title: data.result[t].name,
