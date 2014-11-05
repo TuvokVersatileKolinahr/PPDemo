@@ -21,8 +21,43 @@ body, input, textarea, select{
   transition: all 0.5s ease;
 }
 .card:hover {
-  background-color: rgba(255,255,255,0.9);
+  background-color: rgba(255,255,255,.9);
   margin-left: 75%;
+}
+.card .header{
+  background-color: rgba(255,255,255,.9);
+  box-shadow: 0 0 3px #999;
+  padding: 10px 0 2px;
+  text-align: center;
+}
+.card .header h2{
+  border-bottom: 1px dotted #999999;
+  font-size: 1.2em;
+  padding-bottom: 10px;
+}
+.card .card_handle{
+  background-color: rgba(255,255,255,.1);
+  margin-left: 0;
+  margin-right: 90%;
+  width: 5%;
+  height: 100%;
+  float: left;
+  position: absolute;
+}
+.card .card_handle img{
+  margin-left: auto;
+  margin-right: auto;
+  width: 18px;
+}
+.card .card_content{
+  margin-left: auto;
+  margin-right: 0;
+  width: 95%;
+}
+.card .card_content img{
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
 .list{
   background: rgba(255,255,255,.7);
