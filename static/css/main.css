@@ -104,7 +104,7 @@ body, input, textarea, select{
   list-style-type: none;
 }
 .list ul li.active{
-  background: rgba(29, 65, 155, .6);
+  background: rgba(20,100,161,.6);
   color: #fff;
 }
 .list ul li p {
