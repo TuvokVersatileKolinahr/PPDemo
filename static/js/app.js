@@ -1,3 +1,8 @@
+/**
+ * Demo app for the Planon Property Passport
+ *
+ * Specs: http://2z9ox8.axshare.com/
+ */
 var app = angular.module('propertypassport', [])
 
   .controller('MainController', ['$scope', '$http', function($scope, $http){
