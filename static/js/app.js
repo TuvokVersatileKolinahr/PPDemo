@@ -41,9 +41,11 @@ var app = angular.module('propertypassport', [])
     $scope.clear = function(){
       $scope.showInfo = false;
     }
+  var baseUrl = "http://pc06698";
+  var serviceUrl = baseUrl + "/REST/FrameUI/demo/demo_webclient/SensorService";
+  var executeMethod = "getAllProperties";
 
-    // Get the data from the server...
-    $http.get('static/js/mock.js').
+  $http.post(serviceUrl, {method:executeMethod}).
     success(function(data, status, headers, config) {
       $scope.properties = data.result;
 
@@ -72,12 +74,10 @@ var app = angular.module('propertypassport', [])
         })(marker);
         
       }
-
     }).
     error(function(data, status, headers, config) {
       console.error('Could not retrieve properties from server...');
     });
-
 
     /* Init maps */
     function initialize() {
