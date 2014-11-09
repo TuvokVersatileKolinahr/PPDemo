@@ -6,9 +6,37 @@ html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address
 /* Module */
 html, body{height: 100%;overflow:hidden;}
 body, input, textarea, select{
-  color: #333333;
+  color: #666666;
   font-family:"Open Sans";
   font-size: 1em;
+  -webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;
+}
+::-webkit-input-placeholder{
+  color: #666666;
+  font-style: italic;
+}
+::-ms-input-placeholder{
+  color:#666666;
+  font-style: italic;
+}
+::-moz-placeholder{
+  color:#666666;
+  font-style: italic;
+}
+::placeholder{
+    color:#666666;
+    font-style: italic;
+}
+.top{
+  box-shadow: 1px 0 3px rgba(0, 0, 0, 0.4);
+    position: relative;
+    z-index: 100;
+}
+.top h1{
+  font-size: 2em;
+  font-weight: lighter;
+  line-height: 2;
+  padding-left: 64px;
 }
 .list, .map, .card{height: 100%;}
 .card{
@@ -78,46 +106,52 @@ body, input, textarea, select{
   z-index: 1;
 }
 .list .header{
-  background-color: rgba(255,255,255,.9);
-  box-shadow: 0 0 3px #999;
-  padding: 10px 0 2px;
-  text-align: center;
+  padding: 0 12px 6px;
 }
 .list .header h2{
   border-bottom: 1px dotted #999999;
   font-size: 1.2em;
   padding-bottom: 10px;
 }
-.list .header .filter-label{
-  color: #999999;
-  width: 20%;
-}
 .list .header .filter{
-  border: none;
-  width: 80%;
+  border: 6px solid #86bfdc;
+    border-radius: 3px;
+    padding: 0 6px;
+    width: 100%;
 }
-.list ul li{
-  border-bottom: 1px solid #999999;
+.list li{
+  padding: 3px 12px;
+}
+.list .item{
+  background: #ffffff;
   color: #666666;
   cursor: pointer;
   padding: 5px;
   list-style-type: none;
 }
-.list ul li.active{
+.list .item.active{
   background: rgba(20,100,161,.6);
   color: #fff;
 }
-.list ul li p {
-  margin-left: 160px;
+.list .item p {
+  margin-left: 90px;
   padding: 5px 0;
 }
-.list .image{
-  float: left;
-  margin-right: 10px;
-  max-height: 100px;
-  text-align: center;
-  width: 150px;
+.list .item p:first-of-type, .list .item p:nth-of-type(2){
+  font-weight: bold;
 }
+.list .image{
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+  float: left;
+  height: 75px;
+  margin-left: 5px;
+  margin-right: 10px;
+  overflow: hidden;
+  text-align: center;
+  width: 75px;
+} 
 .map{
   position: absolute;
   width: 100%;

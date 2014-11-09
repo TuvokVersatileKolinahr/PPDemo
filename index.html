@@ -10,23 +10,22 @@
   </head>
   <body ng-controller="MainController">
     <!-- Controls -->
-    <header class="top clearfix"></header>
+    <header class="top clearfix"><h1>My Properties</h1></header>
 
     <section class="list">
       <div class="header">  
-        <h2 >Search</h2>
-      
-        <label class="filter-label" for="filter">Filter:</label>
-        <input type="text" ng-model="filter" id="filter" class="filter"/>
+        <input type="text" ng-model="filter" id="filter" class="filter" placeholder="search building"/>
       </div>
       <ul>
         <li class="clearfix" ng-class="{active : selected.code==property.code}" ng-repeat="property in properties | filter:filter" id="{{property.code}}" ng-dblclick="selectMarkerWithInfo(property.code);" ng-click="selectMarker(property.code)">
-          <div class="image">
-            <img ng-src="{{property.PhotoPhileRef}}" alt="{{property.code}}" />
+          <div class="item clearfix">
+            <div class="image">
+              <img ng-src="{{property.PhotoPhileRef}}" alt="{{property.code}}" />
+            </div>
+            <p>{{property.code}}</p>
+            <p>{{property.name}}</p>
+            <p>{{property.comment}}</p>
           </div>
-          <p>{{property.code}}</p>
-          <p>{{property.name}}</p>
-          <p>{{property.comment}}</p>
         </li>
       </ul>
     </section>
