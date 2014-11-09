@@ -17,8 +17,8 @@
         <input type="text" ng-model="filter" id="filter" class="filter" placeholder="search building"/>
       </div>
       <ul>
-        <li class="clearfix" ng-class="{active : selected.code==property.code}" ng-repeat="property in properties | filter:filter" id="{{property.code}}" ng-dblclick="selectMarkerWithInfo(property.code);" ng-click="selectMarker(property.code)">
-          <div class="item clearfix">
+        <li class="clearfix" ng-repeat="property in properties | filter:filter" id="{{property.code}}" ng-dblclick="selectMarkerWithInfo(property.code);" ng-click="selectMarker(property.code)">
+          <div class="item clearfix"  ng-class="{active : selected.code==property.code}">
             <div class="image">
               <img ng-src="{{property.PhotoPhileRef}}" alt="{{property.code}}" />
             </div>

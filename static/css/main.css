@@ -115,23 +115,27 @@ body, input, textarea, select{
 }
 .list .header .filter{
   border: 6px solid #86bfdc;
-    border-radius: 3px;
-    padding: 0 6px;
-    width: 100%;
+  border-radius: 3px;
+  padding: 0 6px;
+  width: 100%;
 }
 .list li{
   padding: 3px 12px;
 }
 .list .item{
   background: #ffffff;
+  border: 1px solid #D4D5D6;
   color: #666666;
   cursor: pointer;
   padding: 5px;
   list-style-type: none;
 }
 .list .item.active{
-  background: rgba(20,100,161,.6);
+  background: #1464A1;
   color: #fff;
+}
+.list .item.active .image{
+  border-color: #398AC7;
 }
 .list .item p {
   margin-left: 90px;
@@ -141,7 +145,7 @@ body, input, textarea, select{
   font-weight: bold;
 }
 .list .image{
-  border: 2px solid #ffffff;
+  border: 3px solid #ffffff;
   border-radius: 50%;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
   float: left;
