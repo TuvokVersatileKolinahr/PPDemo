@@ -31,6 +31,12 @@ var app = angular.module('propertypassport', ['propertypassport.config'])
     });
 
     if (marker){
+      // handle icons
+      for (var i=0; i<markers.length; i++) {
+        markers[i].setIcon('static/img/marker.png');
+      }         
+      marker.setIcon( 'static/img/selected-marker.png' );
+
       map.panTo(marker.getPosition());
       //map.setZoom(18);
       $scope.properties.forEach(function(p){
@@ -58,14 +64,15 @@ var app = angular.module('propertypassport', ['propertypassport.config'])
         position: new google.maps.LatLng(property.comment.split(",")[0], property.comment.split(",")[1]),
         id: property.code, // set the ID for lookup purposes, @see selectMarker
         title: property.name,
+        icon: 'static/img/marker.png',
         map: map
       });
       markers.push(marker);
 
       // wrap inside a closure to keep reference to the right marker...
       (function(marker){
-        google.maps.event.addListener(marker, 'click', function() {               
-          // TODO select the property in the list
+        google.maps.event.addListener(marker, 'click', function() {
+         
           // show side panel
           $scope.$apply(function(){
             $scope.showInfo = true;
