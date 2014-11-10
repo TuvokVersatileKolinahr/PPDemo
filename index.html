@@ -8,49 +8,17 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link href="static/css/main.css" rel="stylesheet">
   </head>
-  <body ng-controller="MainController">
-    <!-- Controls -->
-    <header class="top clearfix"><h1>My Properties</h1></header>
+  <body>
 
-    <section class="list">
-      <div class="header">  
-        <input type="text" ng-model="filter" id="filter" class="filter" placeholder="search building"/>
-      </div>
-      <ul>
-        <li class="clearfix" ng-repeat="property in properties | filter:filter" id="{{property.code}}" ng-dblclick="selectMarkerWithInfo(property.code);" ng-click="selectMarker(property.code)">
-          <div class="item clearfix"  ng-class="{active : selected.code==property.code}">
-            <div class="image">
-              <img ng-src="{{property.PhotoPhileRef}}" alt="{{property.code}}" />
-            </div>
-            <p>{{property.code}}</p>
-            <p>{{property.name}}</p>
-            <p>{{property.comment}}</p>
-          </div>
-        </li>
-      </ul>
-    </section>
-
-    <section class="card" ng-class="{open : showInfo}">
-    <div class="card_handle">
-      <a href="#" ng-click="clear()" class="close">&times;</a>
-    </div>
-      <div class="card_content">
-        <div class="header">
-          <h2>Info</h2>
-        </div>
-        <h3>{{selected.code}}</h3>
-        <img ng-src="{{selected.PhotoPhileRef}}" alt="{{selected.code}}" />
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint natus itaque ex laborum praesentium soluta velit repudiandae deserunt magni ut dolorem obcaecati labore voluptatem reiciendis placeat tempora nisi ab laboriosam.</p>
-      </div>
-    </section>
-
-    <section class="map" id="map-canvas">
-
-    </section>
+    <div ng-view></div>
+    
     <script src='static/js/vendor/angularjs/1.3.0/angular.min.js'></script>
+    <script src='static/js/vendor/angularjs/1.3.0/angular-route.min.js'></script>
+    <script src='static/js/controllers.js'></script>
     <script src='static/js/app.js'></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMFGTIvS385CKvB7J8FC5cBala85M9FLQ" type="text/javascript"></script>
     <script src="static/js/vendor/d3.v3.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="static/js/line.js" type="text/javascript"></script>
+
   </body>
 </html>
