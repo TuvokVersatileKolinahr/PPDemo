@@ -44,8 +44,12 @@ ppControllers.controller('MainController', ['$scope', '$http', 'config', functio
       $scope.showInfo = !$scope.showInfo;
     }
   }
-  $scope.clear = function(){
+  $scope.clear = function(event){
     $scope.showInfo = false;
+    if(event){
+      event.stopPropagation();
+      event.preventDefault();
+    }
   }
 
   /* Init maps */
