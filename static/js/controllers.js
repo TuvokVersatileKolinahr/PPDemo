@@ -1,13 +1,19 @@
 var ppControllers = angular.module('ppControllers', []);
 
-ppControllers.controller('EditController', ['$scope', '$http', 'config', '$routeParams', function($scope, $http, config, $routeParams){
+ppControllers.controller('EditController', ['$scope', '$http', 'config', '$routeParams', 'dataCache', function($scope, $http, config, $routeParams, dataCache){
     $scope.propertyId = $routeParams.propertyId;
+    var properties = dataCache.get('properties.list');
+    console.log('properties.length', properties.length);
+
+    //TODO: After succesfull edit a cacherefresh is due
+    dataCache.put('properties.ts', 0);
+
 }]);
 
-ppControllers.controller('MainController', ['$scope', '$http', 'config', function($scope, $http, config){
+ppControllers.controller('MainController', ['$scope', '$http', 'config', 'dataCache', function($scope, $http, config, dataCache){
 
   var map, markers = [];
-
+  var properties = dataCache.get('properties.list');
   /**
    * Zoom to a marker with a specific ID on the map
    * @param string The id of the marker
@@ -63,8 +69,8 @@ ppControllers.controller('MainController', ['$scope', '$http', 'config', functio
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
   }
 
-  function drawMarkers (data) {
-    for (var t = 0; t < data.result.length; t++) {
+  function drawMarkers () {
+    for (var t = 0; t < $scope.properties.length; t++) {
       var property = $scope.properties[t];
       var marker = new google.maps.Marker({
         position: new google.maps.LatLng(property.comment.split(",")[0], property.comment.split(",")[1]),
@@ -91,30 +97,41 @@ ppControllers.controller('MainController', ['$scope', '$http', 'config', functio
 
   initialize();
 
-  if (config.localdev) {
-    $http.get('static/js/mock.js').
-      success(  function(data, status, headers, config) {
-        $scope.properties = data.result;
+    // if (properties && (Date.now() - dataCache.get('properties.ts') < 20000 )) { //we have a cached version of the properties & cache is less than 20 seconds old
+  if (properties && (Date.now() - dataCache.get('properties.ts') < 300000 )) { //we have a cached version of the properties & cache is less than 5 minutes old
+    $scope.properties = properties;
+    console.log('Got cached ' + $scope.properties.length + ' properties');
+    drawMarkers();
+  } else { //we need to fetch the properties
+    if (config.localdev) {
+      $http.get('static/js/mock.js').
+        success(  function(data, status, headers, config) {
+          $scope.properties = data.result;
+          dataCache.put('properties.list', data.result);
+          dataCache.put('properties.ts', Date.now());
 
-        console.log('Got ' + $scope.properties.length + ' properties');
+          console.log('Got ' + $scope.properties.length + ' properties');
 
-        drawMarkers(data);
-      }).
-      error(function(data, status, headers, config) {
-        console.error('Could not retrieve properties from server...');
-      });
-  } else {
-    $http.post(config.baseUrl + config.serviceUrl, {method:config.executeMethod}).
-      success(  function(data, status, headers, config) {
-        $scope.properties = data.result;
+          drawMarkers();
+        }).
+        error(function(data, status, headers, config) {
+          console.error('Could not retrieve properties from server...');
+        });        
+    } else {
+      $http.post(config.baseUrl + config.serviceUrl, {method:config.executeMethod}).
+        success(  function(data, status, headers, config) {
+          $scope.properties = data.result;
+          dataCache.put('properties.list', data.result);
+          dataCache.put('properties.ts', Date.now());
 
-        console.log('Got ' + $scope.properties.length + ' properties');
+          console.log('Got ' + $scope.properties.length + ' properties');
 
-        drawMarkers(data);
-      }).
-      error(function(data, status, headers, config) {
-        console.error('Could not retrieve properties from server...');
-      });
+          drawMarkers();
+        }).
+        error(function(data, status, headers, config) {
+          console.error('Could not retrieve properties from server...');
+        });
+    }
   }
 
   // google.maps.event.addDomListener(window, 'load', initialize);

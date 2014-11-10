@@ -28,3 +28,7 @@ app.config(['$routeProvider',
         redirectTo: '/properties'
       });
   }]);
+
+app.factory('dataCache', function($cacheFactory) {
+  return $cacheFactory('properties');
+});
