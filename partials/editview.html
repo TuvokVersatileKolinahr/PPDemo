@@ -4,9 +4,13 @@ TODO: edit view for <span>{{propertyId}}</span>
     <h2>Info</h2>
   </div>
   <h3>{{selected.code}}</h3>
-  <img ng-src="{{selected.PhotoPhileRef}}" alt="{{selected.code}}" />
+  <img ng-src="{{selected.photoref}}" alt="{{selected.code}}" />
   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint natus itaque ex laborum praesentium soluta velit repudiandae deserunt magni ut dolorem obcaecati labore voluptatem reiciendis placeat tempora nisi ab laboriosam.</p>
 </div>
 
+<form novalidate class="simple-form">
+  Name: <input type="text" ng-model="selected.name" /><br />
+  <button ng-click="update(selected)">SAVE</button>
+</form>
 
 <a href="#/properties">BACK</a>

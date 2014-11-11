@@ -10,7 +10,7 @@
         <li class="clearfix" ng-repeat="property in properties | filter:filter" id="{{property.code}}" ng-dblclick="selectMarkerWithInfo(property.code);" ng-click="selectMarker(property.code)">
           <div class="item clearfix"  ng-class="{active : selected.code==property.code}">
             <div class="image">
-              <img ng-src="{{property.PhotoPhileRef}}" alt="{{property.code}}" />
+              <img ng-src="{{property.photoref}}" alt="{{property.code}}" />
             </div>
             <p>{{property.code}}</p>
             <p>{{property.name}}</p>
@@ -29,7 +29,7 @@
           <h2>Info</h2>
         </div>
         <h3>{{selected.code}}</h3>
-        <img ng-src="{{selected.PhotoPhileRef}}" alt="{{selected.code}}" />
+        <img ng-src="{{selected.photoref}}" alt="{{selected.code}}" />
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint natus itaque ex laborum praesentium soluta velit repudiandae deserunt magni ut dolorem obcaecati labore voluptatem reiciendis placeat tempora nisi ab laboriosam.</p>
       </div>
       <a href="#/properties/{{selected.code}}">EDIT</a>

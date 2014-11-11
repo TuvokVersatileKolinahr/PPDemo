@@ -2,8 +2,32 @@ var ppControllers = angular.module('ppControllers', []);
 
 ppControllers.controller('EditController', ['$scope', '$http', 'config', '$routeParams', 'dataCache', function($scope, $http, config, $routeParams, dataCache){
     $scope.propertyId = $routeParams.propertyId;
-    var properties = dataCache.get('properties.list');
-    console.log('properties.length', properties.length);
+    $scope.properties = dataCache.get('properties.list')
+
+    $scope.properties.forEach(function(p){
+      if (p.code === $scope.propertyId){
+        $scope.selected = p;
+      }
+    });
+
+    $scope.update = function(property) {
+      // $scope.master = angular.copy(user);
+      var aArguments    = [$scope.propertyId, "\"Test 123\""];
+      $http.post(config.baseUrl + config.serviceUrl, {method:config.executeMethodSave, args: aArguments}).
+        success(  function(data, status, headers, config) {
+          $scope.properties = data.result;
+          dataCache.put('properties.list', data.result);
+          dataCache.put('properties.ts', Date.now());
+
+          console.log('Got ' + $scope.properties.length + ' properties');
+
+          drawMarkers();
+        }).
+        error(function(data, status, headers, config) {
+          console.error('Could not retrieve properties from server...');
+        });
+    };
+
 
     //TODO: After succesfull edit a cacherefresh is due
     dataCache.put('properties.ts', 0);
@@ -98,9 +122,9 @@ ppControllers.controller('MainController', ['$scope', '$http', 'config', 'dataCa
   initialize();
 
     // if (properties && (Date.now() - dataCache.get('properties.ts') < 20000 )) { //we have a cached version of the properties & cache is less than 20 seconds old
-  if (properties && (Date.now() - dataCache.get('properties.ts') < 300000 )) { //we have a cached version of the properties & cache is less than 5 minutes old
+  if (properties && (Date.now() - dataCache.get('properties.ts') < 1 )) { //we have a cached version of the properties & cache is less than 5 minutes old
     $scope.properties = properties;
-    console.log('Got cached ' + $scope.properties.length + ' properties');
+    // console.log('Got cached ' + $scope.properties.length + ' properties');
     drawMarkers();
   } else { //we need to fetch the properties
     if (config.localdev) {
@@ -110,7 +134,7 @@ ppControllers.controller('MainController', ['$scope', '$http', 'config', 'dataCa
           dataCache.put('properties.list', data.result);
           dataCache.put('properties.ts', Date.now());
 
-          console.log('Got ' + $scope.properties.length + ' properties');
+          // console.log('Got ' + $scope.properties.length + ' properties');
 
           drawMarkers();
         }).
@@ -118,14 +142,27 @@ ppControllers.controller('MainController', ['$scope', '$http', 'config', 'dataCa
           console.error('Could not retrieve properties from server...');
         });        
     } else {
-      $http.post(config.baseUrl + config.serviceUrl, {method:config.executeMethod}).
+      $http.post(config.baseUrl + config.serviceUrl, {method:config.executeMethodGetList}).
         success(  function(data, status, headers, config) {
-          $scope.properties = data.result;
-          dataCache.put('properties.list', data.result);
-          dataCache.put('properties.ts', Date.now());
+          if (data.result){
+            for(var i=0; i < data.result.length; i++) {
+              if (data.result[i].photoref) {
+                // console.log('photoref', data.result[i].photoref);
+                data.result[i].photoref = data.result[i].photoref.split('webapps')[1].replace(/\\/g, '/');
+                // console.log('photoref', data.result[i].photoref);
+              } else {
+                data.result[i].photoref = '/static/buildings/no_image.jpg';
+              }
+            }
 
-          console.log('Got ' + $scope.properties.length + ' properties');
+            $scope.properties = data.result;
+            dataCache.put('properties.list', data.result);
+            dataCache.put('properties.ts', Date.now());
 
+            // console.log('Got ' + $scope.properties.length + ' properties');
+          } else {
+            dataCache.get('properties.list')
+          }
           drawMarkers();
         }).
         error(function(data, status, headers, config) {

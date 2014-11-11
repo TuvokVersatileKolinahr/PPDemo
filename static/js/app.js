@@ -1,10 +1,11 @@
 angular.module('propertypassport.config',[])
   .constant('config', {
     'version': 0.2,
-    'localdev': true,
+    'localdev': false,
     'baseUrl': 'http://pc06698',
     'serviceUrl': '/REST/FrameUI/demo/demo_webclient/SensorService',
-    'executeMethod': 'getAllProperties'
+    'executeMethodGetList': 'getAllProperties',
+    'executeMethodSave': 'putAllProperties'
   })
 /**
  * Demo app for the Planon Property Passport
@@ -29,6 +30,10 @@ app.config(['$routeProvider',
       });
   }]);
 
+/**
+ * Frontend cache, used for minification of the data traffic between front-end and backend and communication between controllers
+ */
 app.factory('dataCache', function($cacheFactory) {
+
   return $cacheFactory('properties');
 });
