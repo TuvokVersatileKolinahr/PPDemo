@@ -86,7 +86,7 @@ ppControllers.controller('MainController', ['$scope', '$http', 'config', 'dataCa
   function initialize() {
     var mapOptions = {
       // center: { lat: 51.5873617, lng: 4.7663469},//Breda
-      center: { lat: 51.84873, lng: 5.86428 }, //Nijmegen
+      center: { lat: 51.845794, lng: 5.863969 }, //Nijmegen
       zoom: 16,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       disableDefaultUI: true
