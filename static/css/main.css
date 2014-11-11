@@ -33,10 +33,12 @@ body, input, textarea, select{
     z-index: 100;
 }
 .top h1{
-  font-size: 2em;
+  font-size: 1.3em;
   font-weight: lighter;
-  line-height: 2;
+  line-height: 1.8;
   padding-left: 64px;
+  background-color: #fff;
+  border-radius: 4px 4px 0 0;
 }
 .list, .map, .card{height: 100%;}
 .card{
@@ -104,10 +106,10 @@ body, input, textarea, select{
   position: absolute;
   width: 25%;
   z-index: 1;
-  padding-bottom: 70px;
+  padding-bottom: 42px;
 }
 .list .header{
-  padding: 0 12px 6px;
+  padding: 6px 12px 6px;
 }
 .list .header h2{
   border-bottom: 1px dotted #999999;
