@@ -1,11 +1,16 @@
-TODO: edit view for <span>{{propertyId}}</span>
 <div>
   <div class="header">
-    <h2>Info</h2>
+    <h2>{{selected.name}}</h2>
   </div>
-  <h3>{{selected.code}}</h3>
+  <h3 ng-switch={{selected.usage}}>
+    <span ng-switch-when='1'>Church</span>
+    <span ng-switch-when='2'>Museum</span>
+    <span ng-switch-when='3'>Shop</span>
+    <span ng-switch-when='4'>Office</span>
+    <span ng-switch-when='5'>Brewery</span>
+    <span ng-switch-default>Cafe</span>
+  </h3>
   <img ng-src="{{selected.photoref}}" alt="{{selected.code}}" />
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint natus itaque ex laborum praesentium soluta velit repudiandae deserunt magni ut dolorem obcaecati labore voluptatem reiciendis placeat tempora nisi ab laboriosam.</p>
 </div>
 
 <form novalidate class="simple-form">
