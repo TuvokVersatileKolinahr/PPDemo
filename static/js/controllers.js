@@ -120,6 +120,13 @@ ppControllers.controller('MainController', ['$scope', '$http', 'config', 'dataCa
     }
   }
 
+  function fix_photoref(ref) {
+    if (ref)
+    return ref.split('webapps')[1].replace(/\\/g, '/');
+    else
+      return '/static/buildings/no_image.jpg'
+  }
+
   initialize();
 
     // if (properties && (Date.now() - dataCache.get('properties.ts') < 20000 )) { //we have a cached version of the properties & cache is less than 20 seconds old
@@ -129,8 +136,11 @@ ppControllers.controller('MainController', ['$scope', '$http', 'config', 'dataCa
     drawMarkers();
   } else { //we need to fetch the properties
     if (config.localdev) {
-      $http.get('static/js/mock.js').
+      $http.get('static/js/mock-nijmegen.js').
         success(  function(data, status, headers, config) {
+          for(var i=0; i < data.result.length; i++) {
+            data.result[i].photoref = fix_photoref(data.result[i].photoref);
+          }
           $scope.properties = data.result;
           dataCache.put('properties.list', data.result);
           dataCache.put('properties.ts', Date.now());
@@ -147,13 +157,7 @@ ppControllers.controller('MainController', ['$scope', '$http', 'config', 'dataCa
         success(  function(data, status, headers, config) {
           if (data.result){
             for(var i=0; i < data.result.length; i++) {
-              if (data.result[i].photoref) {
-                // console.log('photoref', data.result[i].photoref);
-                data.result[i].photoref = data.result[i].photoref.split('webapps')[1].replace(/\\/g, '/');
-                // console.log('photoref', data.result[i].photoref);
-              } else {
-                data.result[i].photoref = '/static/buildings/no_image.jpg';
-              }
+              data.result[i].photoref = fix_photoref(data.result[i].photoref);
             }
 
             $scope.properties = data.result;
