@@ -4,17 +4,16 @@
 
     <section class="list">
       <div class="header">  
-        <input type="text" ng-model="filter" id="filter" class="filter" placeholder="search building"/>
+        <input type="text" ng-model="searchText" id="filter" class="filter" placeholder="search building"/>
       </div>
       <ul>
-        <li class="clearfix" ng-repeat="property in properties | filter:filter" id="{{property.code}}" ng-dblclick="selectMarkerWithInfo(property.code);" ng-click="selectMarker(property.code)">
+        <li class="clearfix" ng-repeat="property in properties | filter:searchText" id="{{property.code}}" ng-dblclick="selectMarkerWithInfo(property.code);" ng-click="selectMarker(property.code)">
           <div class="item clearfix"  ng-class="{active : selected.code==property.code}">
             <div class="image">
               <img ng-src="{{property.photoref}}" alt="{{property.code}}" />
             </div>
-            <p>{{property.code}}</p>
             <p>{{property.name}}</p>
-            <p ng-switch={{property.usage}}>
+            <p ng-switch={{property.usage}} class="type">
               <span ng-switch-when='1'>Church</span>
               <span ng-switch-when='2'>Museum</span>
               <span ng-switch-when='3'>Shop</span>
@@ -38,7 +37,16 @@
         </div>
         <h3>{{selected.code}}</h3>
         <img ng-src="{{selected.photoref}}" alt="{{selected.code}}" />
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint natus itaque ex laborum praesentium soluta velit repudiandae deserunt magni ut dolorem obcaecati labore voluptatem reiciendis placeat tempora nisi ab laboriosam.</p>
+        <div class="header sub">
+          <h2>Object data</h2>
+        </div>
+        <span>Cadstral area: {{selected.cadastralArea|num}} m<sup>2</sup></span><br>
+        <span>Area built on: {{selected.areabuilton|num}} m<sup>2</sup></span><br>
+        <span>Cadastral number: {{selected.cadastralNumbers}}</span><br>
+        <div class="header sub">
+          <h2>Financial data</h2>
+        </div>
+        <span>Annual ground rent: &#8364;{{selected.groundrent|num}}.-</span><br>
       </div>
       <a href="#/properties/{{selected.code}}">EDIT</a>
     </section>

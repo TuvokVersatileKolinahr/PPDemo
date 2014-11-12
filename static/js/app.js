@@ -38,3 +38,12 @@ app.factory('dataCache', function($cacheFactory) {
 
   return $cacheFactory('properties');
 });
+
+/**
+ * Filer number data
+ */
+app.filter('num', function() {
+    return function(input) {
+      return parseInt(input, 10);
+    }
+});

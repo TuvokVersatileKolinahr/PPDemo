@@ -27,6 +27,10 @@ body, input, textarea, select{
     color:#666666;
     font-style: italic;
 }
+sup {
+  font-size: .7em;
+  vertical-align: +50%;
+}
 .top{
   box-shadow: 1px 0 3px rgba(0, 0, 0, 0.4);
     position: relative;
@@ -78,6 +82,13 @@ body, input, textarea, select{
   border-bottom: 1px dotted #999999;
   font-size: 1.2em;
   padding-bottom: 10px;
+}
+.card .sub {
+  background: transparent;
+}
+.card .sub h2 {
+  font-size: .7em;
+  border-bottom: 0;
 }
 .card .card_handle{
   background-color: rgba(255,255,255,.1);
@@ -143,6 +154,9 @@ body, input, textarea, select{
 .list .item p {
   margin-left: 90px;
   padding: 5px 0;
+}
+.type span{
+  font-size: .8em;
 }
 .list .item p:first-of-type, .list .item p:nth-of-type(2){
   font-weight: bold;
