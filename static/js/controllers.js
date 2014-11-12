@@ -91,6 +91,15 @@ ppControllers.controller('MainController', ['$scope', '$http', 'config', 'dataCa
         }
       });
       console.log('Zoom to marker ' + id);
+      if ($scope.showInfo) {
+        removeTempGraph();
+        console.log("Fetch temperature data selectMarker");
+        if (config.localdev) {
+          getTempGraph('static/js/temperaturedata.js?t_id=' + $scope.selected.tempSensorId);
+        } else {
+          getTempGraph('/sensors/' + $scope.selected.tempSensorId + '/readings/temp');
+        }
+      }
     }
     return marker;
   };
@@ -102,6 +111,7 @@ ppControllers.controller('MainController', ['$scope', '$http', 'config', 'dataCa
    */
   $scope.selectMarkerWithInfo = function(id){
     if ($scope.selectMarker(id)){
+      console.log("Fetch temperature data selectMarkerWithInfo");
       $scope.showInfo = !$scope.showInfo;
     }
   }
