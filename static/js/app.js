@@ -5,7 +5,8 @@ angular.module('propertypassport.config',[])
     'baseUrl': 'http://pc06698',
     'serviceUrl': '/REST/FrameUI/demo/demo_webclient/SensorService',
     'executeMethodGetList': 'getAllProperties',
-    'executeMethodSave': 'putAllProperties'
+    'executeMethodSave': 'putAllProperties',
+    'cache_refresh': 1
   })
 /**
  * Demo app for the Planon Property Passport

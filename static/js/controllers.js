@@ -1,46 +1,71 @@
 var ppControllers = angular.module('ppControllers', []);
 
+/**
+ * EditController. Responsible fot the 'editview'.
+ */
 ppControllers.controller('EditController', ['$scope', '$http', 'config', '$routeParams', 'dataCache', function($scope, $http, config, $routeParams, dataCache){
-    $scope.propertyId = $routeParams.propertyId;
-    $scope.properties = dataCache.get('properties.list')
 
-    $scope.properties.forEach(function(p){
-      if (p.code === $scope.propertyId){
-        $scope.selected = p;
-      }
-    });
-
-    $scope.update = function(property) {
-      // $scope.master = angular.copy(user);
-      var aArguments    = [$scope.propertyId, "\"Test 123\""];
-      $http.post(config.baseUrl + config.serviceUrl, {method:config.executeMethodSave, args: aArguments}).
-        success(  function(data, status, headers, config) {
-          $scope.properties = data.result;
-          dataCache.put('properties.list', data.result);
-          dataCache.put('properties.ts', Date.now());
-
-          console.log('Got ' + $scope.properties.length + ' properties');
-
-          drawMarkers();
-        }).
-        error(function(data, status, headers, config) {
-          console.error('Could not retrieve properties from server...');
-        });
-    };
+  /** --- local variables --- **/
 
 
-    //TODO: After succesfull edit a cacherefresh is due
-    dataCache.put('properties.ts', 0);
+  /** --- scoped variables --- **/
+  $scope.propertyId = $routeParams.propertyId;
+  $scope.properties = dataCache.get('properties.list')
+  // Find the selected property
+  $scope.properties.forEach(function(p){
+    if (p.code === $scope.propertyId){
+      $scope.selected = p;
+    }
+  });
+
+
+  /** --- public methods --- **/
+
+  /**
+   * Updates a property
+   *
+   * @param Object the property
+   */
+  $scope.update = function(property) {
+    var aArguments    = [$scope.propertyId, "\"Test 123\""];
+    $http.post(config.baseUrl + config.serviceUrl, {method:config.executeMethodSave, args: aArguments}).
+      success(  function(data, status, headers, config) {
+        $scope.properties = data.result;
+        dataCache.put('properties.list', data.result);
+        dataCache.put('properties.ts', Date.now());
+
+        console.log('Got ' + $scope.properties.length + ' properties');
+
+        drawMarkers();
+      }).
+      error(function(data, status, headers, config) {
+        console.error('Could not retrieve properties from server...');
+      });
+  };
+
+  //TODO: After succesfull edit a cacherefresh is due
+  dataCache.put('properties.ts', 0);
 
 }]);
 
+
+/**
+ * MainController. Responsible fot the 'mapview'.
+ */
 ppControllers.controller('MainController', ['$scope', '$http', 'config', 'dataCache', function($scope, $http, config, dataCache){
+
+  /** --- local variables --- **/
 
   var map, markers = [];
   var properties = dataCache.get('properties.list');
+
+  /** --- public methods --- **/
+
   /**
    * Zoom to a marker with a specific ID on the map
+   *
    * @param string The id of the marker
+   *
    * @return google.maps.Marker the selected marker or undefined when not found
    */
   $scope.selectMarker = function(id){
@@ -69,11 +94,22 @@ ppControllers.controller('MainController', ['$scope', '$http', 'config', 'dataCa
     }
     return marker;
   };
+
+  /**
+   * Select marker with a specific ID and show info
+   *
+   * @param string The id of the marker
+   */
   $scope.selectMarkerWithInfo = function(id){
     if ($scope.selectMarker(id)){
       $scope.showInfo = !$scope.showInfo;
     }
   }
+  /**
+   * Clears the info of a marker with a specific ID
+   *
+   * @param string The id of the marker
+   */
   $scope.clear = function(event){
     $scope.showInfo = false;
     if(event){
@@ -82,8 +118,12 @@ ppControllers.controller('MainController', ['$scope', '$http', 'config', 'dataCa
     }
   }
 
-  /* Init maps */
-  function initialize() {
+  /** --- private methods --- **/
+
+  /**
+   * Initializes the map
+   */
+  function _initialize() {
     var mapOptions = {
       // center: { lat: 51.5873617, lng: 4.7663469},//Breda
       center: { lat: 51.845794, lng: 5.863969 }, //Nijmegen
@@ -94,7 +134,10 @@ ppControllers.controller('MainController', ['$scope', '$http', 'config', 'dataCa
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
   }
 
-  function drawMarkers () {
+  /**
+   * Draws markers on the map
+   */
+  function _drawMarkers () {
     for (var t = 0; t < $scope.properties.length; t++) {
       var property = $scope.properties[t];
       var marker = new google.maps.Marker({
@@ -120,62 +163,75 @@ ppControllers.controller('MainController', ['$scope', '$http', 'config', 'dataCa
     }
   }
 
-  function fix_photoref(ref) {
+  /**
+   * Workaround for images in EE without Webdav configured. Fixes the reference as stored in EE to a file url.
+   * 
+   * This method assumes two things:
+   * - the file is stored in "{PATH_TO_TOMCAT}webapps\static\buildings\filename.jpg"
+   * - the file is accessible under url "/static/buildings/filename.jpg"
+   * 
+   * @param String ref to the EE image path
+   * 
+   * @return String file url
+   */
+  function _fixPhotoRef(ref) {
     if (ref)
-    return ref.split('webapps')[1].replace(/\\/g, '/');
+      return ref.split('webapps')[1].replace(/\\/g, '/');
     else
       return '/static/buildings/no_image.jpg'
   }
 
-  initialize();
+  /**
+   * Handles the properties that are received from an external JSON/Webservice
+   *
+   * @param Object data
+   * @param String return staus of the call
+   * @param Object the headers
+   * @param Object the configuration
+   */
+  function _handleProperties(data, status, headers, config) {
+    if (data.result){
+      for(var i=0; i < data.result.length; i++) {
+        data.result[i].photoref = _fixPhotoRef(data.result[i].photoref);
+      }
 
-    // if (properties && (Date.now() - dataCache.get('properties.ts') < 20000 )) { //we have a cached version of the properties & cache is less than 20 seconds old
-  if (properties && (Date.now() - dataCache.get('properties.ts') < 1 )) { //we have a cached version of the properties & cache is less than 5 minutes old
+      $scope.properties = data.result;
+      dataCache.put('properties.list', data.result);
+      dataCache.put('properties.ts', Date.now());
+
+    } else {
+      dataCache.get('properties.list')
+    }
+    _drawMarkers();
+  }
+
+  /**
+   * Initializes the map
+   */
+  _initialize();
+
+  /**
+   * Fetch the data from an external source if there is no cache version or if the cache is overdue
+   */
+  if (properties && (Date.now() - dataCache.get('properties.ts') < config.cache_refresh )) {
+    //we have a cached version of the properties & cache is less than 'config.cache_refresh' old
     $scope.properties = properties;
-    // console.log('Got cached ' + $scope.properties.length + ' properties');
-    drawMarkers();
+    console.log('Got cached ' + $scope.properties.length + ' properties');
+    _drawMarkers();
   } else { //we need to fetch the properties
     if (config.localdev) {
       $http.get('static/js/mock-nijmegen.js').
-        success(  function(data, status, headers, config) {
-          for(var i=0; i < data.result.length; i++) {
-            data.result[i].photoref = fix_photoref(data.result[i].photoref);
-          }
-          $scope.properties = data.result;
-          dataCache.put('properties.list', data.result);
-          dataCache.put('properties.ts', Date.now());
-
-          // console.log('Got ' + $scope.properties.length + ' properties');
-
-          drawMarkers();
-        }).
+        success( _handleProperties ).
         error(function(data, status, headers, config) {
           console.error('Could not retrieve properties from server...');
         });        
     } else {
       $http.post(config.baseUrl + config.serviceUrl, {method:config.executeMethodGetList}).
-        success(  function(data, status, headers, config) {
-          if (data.result){
-            for(var i=0; i < data.result.length; i++) {
-              data.result[i].photoref = fix_photoref(data.result[i].photoref);
-            }
-
-            $scope.properties = data.result;
-            dataCache.put('properties.list', data.result);
-            dataCache.put('properties.ts', Date.now());
-
-            // console.log('Got ' + $scope.properties.length + ' properties');
-          } else {
-            dataCache.get('properties.list')
-          }
-          drawMarkers();
-        }).
+        success( _handleProperties ).
         error(function(data, status, headers, config) {
           console.error('Could not retrieve properties from server...');
         });
     }
   }
-
-  // google.maps.event.addDomListener(window, 'load', initialize);
 
 }]);
