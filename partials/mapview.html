@@ -1,19 +1,19 @@
 
     <!-- Controls -->
-    <header class="top clearfix"><h1>My Properties ({{properties.length}})</h1></header>
+    <header class="top clearfix"><h1>My Properties ({{properties.result.length}})</h1></header>
 
     <section class="list">
       <div class="header">  
         <input type="text" ng-model="searchText" id="filter" class="filter" placeholder="search building"/>
       </div>
       <ul>
-        <li class="clearfix" ng-repeat="property in properties | filter:searchText" id="{{property.code}}" ng-dblclick="selectMarkerWithInfo(property.code);" ng-click="selectMarker(property.code)">
+        <li class="clearfix" ng-repeat="property in properties.result | filter:searchText" id="{{property.code}}" ng-dblclick="selectMarkerWithInfo(property.code);" ng-click="selectMarker(property.code)">
           <div class="item clearfix"  ng-class="{active : selected.code==property.code}">
             <div class="image">
               <img ng-src="{{property.photoref}}" alt="{{property.code}}" />
             </div>
             <p>{{property.name}}</p>
-            <p ng-switch={{property.usage}} class="type">
+            <p ng-switch on={{property.usage}} class="type">
               <span ng-switch-when='1'>Church</span>
               <span ng-switch-when='2'>Museum</span>
               <span ng-switch-when='3'>Shop</span>

@@ -1,9 +1,7 @@
-var ppControllers = angular.module('ppControllers', []);
-
 /**
  * EditController. Responsible fot the 'editview'.
  */
-ppControllers.controller('EditController', function($scope, $http, config, $routeParams, dataCache){
+app.controller('EditController', function($scope, $http, config, $routeParams, dataCache){
 
   /** --- local variables --- **/
 
@@ -53,12 +51,14 @@ ppControllers.controller('EditController', function($scope, $http, config, $rout
 /**
  * MainController. Responsible fot the 'mapview'.
  */
-ppControllers.controller('MainController', function($scope, $http, config, dataCache){
+app.controller('MainController', function($scope, $http, config, PropertyData){
 
   /** --- local variables --- **/
 
   var map, markers = [];
-  var properties = dataCache.get('properties.list');
+  // var properties = dataCache.get('properties.list');
+  
+  $scope.properties = new PropertyData();
 
   /** --- public methods --- **/
 
@@ -136,7 +136,6 @@ ppControllers.controller('MainController', function($scope, $http, config, dataC
    */
   function _initialize() {
     var mapOptions = {
-      // center: { lat: 51.5873617, lng: 4.7663469},//Breda
       center: { lat: 51.845794, lng: 5.863969 }, //Nijmegen
       zoom: 16,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -175,78 +174,8 @@ ppControllers.controller('MainController', function($scope, $http, config, dataC
   }
 
   /**
-   * Workaround for images in EE without Webdav configured. Fixes the reference as stored in EE to a file url.
-   * 
-   * This method assumes two things:
-   * - the file is stored in "{PATH_TO_TOMCAT}webapps\static\buildings\filename.jpg"
-   * - the file is accessible under url "/static/buildings/filename.jpg"
-   * 
-   * @param String ref to the EE image path
-   * 
-   * @return String file url
-   */
-  function _fixPhotoRef(ref) {
-    var imgurl = '/static/buildings/no_image.jpg';
-    if (ref)
-      imgurl = ref.split('webapps')[1].replace(/\\/g, '/');
-
-    if (config.localdev)
-      imgurl = imgurl.slice(1);
-
-    return imgurl;
-  }
-
-  /**
-   * Handles the properties that are received from an external JSON/Webservice
-   *
-   * @param Object data
-   * @param String return staus of the call
-   * @param Object the headers
-   * @param Object the configuration
-   */
-  function _handleProperties(data, status, headers, config) {
-    if (data.result){
-      for(var i=0; i < data.result.length; i++) {
-        data.result[i].photoref = _fixPhotoRef(data.result[i].photoref);
-      }
-
-      $scope.properties = data.result;
-      dataCache.put('properties.list', data.result);
-      dataCache.put('properties.ts', Date.now());
-
-    } else {
-      dataCache.get('properties.list')
-    }
-    _drawMarkers();
-  }
-
-  /**
    * Initializes the map
    */
   _initialize();
-
-  /**
-   * Fetch the data from an external source if there is no cache version or if the cache is overdue
-   */
-  if (properties && (Date.now() - dataCache.get('properties.ts') < config.cache_refresh )) {
-    //we have a cached version of the properties & cache is less than 'config.cache_refresh' old
-    $scope.properties = properties;
-    console.log('Got cached ' + $scope.properties.length + ' properties');
-    _drawMarkers();
-  } else { //we need to fetch the properties
-    if (config.localdev) {
-      $http.get('static/js/mock-nijmegen.js').
-        success( _handleProperties ).
-        error(function(data, status, headers, config) {
-          console.error('Could not retrieve properties from server...');
-        });        
-    } else {
-      $http.post(config.baseUrl + config.serviceUrl, {method:config.executeMethodGetList}).
-        success( _handleProperties ).
-        error(function(data, status, headers, config) {
-          console.error('Could not retrieve properties from server...');
-        });
-    }
-  }
 
 });
