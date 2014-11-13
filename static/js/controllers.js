@@ -3,7 +3,7 @@ var ppControllers = angular.module('ppControllers', []);
 /**
  * EditController. Responsible fot the 'editview'.
  */
-ppControllers.controller('EditController', ['$scope', '$http', 'config', '$routeParams', 'dataCache', function($scope, $http, config, $routeParams, dataCache){
+ppControllers.controller('EditController', function($scope, $http, config, $routeParams, dataCache){
 
   /** --- local variables --- **/
 
@@ -47,13 +47,13 @@ ppControllers.controller('EditController', ['$scope', '$http', 'config', '$route
   //TODO: After succesfull edit a cacherefresh is due
   dataCache.put('properties.ts', 0);
 
-}]);
+});
 
 
 /**
  * MainController. Responsible fot the 'mapview'.
  */
-ppControllers.controller('MainController', ['$scope', '$http', 'config', 'dataCache', function($scope, $http, config, dataCache){
+ppControllers.controller('MainController', function($scope, $http, config, dataCache){
 
   /** --- local variables --- **/
 
@@ -249,4 +249,4 @@ ppControllers.controller('MainController', ['$scope', '$http', 'config', 'dataCa
     }
   }
 
-}]);
+});

@@ -1,7 +1,7 @@
 angular.module('propertypassport.config',[])
   .constant('config', {
     'version': 0.2,
-    'localdev': true,
+    'localdev': false,
     'baseUrl': 'http://pc06698',
     'serviceUrl': '/REST/FrameUI/demo/demo_webclient/SensorService',
     'executeMethodGetList': 'getAllProperties',
@@ -15,8 +15,7 @@ angular.module('propertypassport.config',[])
  */
 var app = angular.module('propertypassport', ['propertypassport.config', 'ngRoute', 'ppControllers']);
 
-app.config(['$routeProvider',
-  function($routeProvider) {
+app.config(function($routeProvider) {
     $routeProvider.
       when('/properties', {
         templateUrl: 'partials/mapview.html',
@@ -29,13 +28,12 @@ app.config(['$routeProvider',
       otherwise({
         redirectTo: '/properties'
       });
-  }]);
+  });
 
 /**
  * Frontend cache, used for minification of the data traffic between front-end and backend and communication between controllers
  */
 app.factory('dataCache', function($cacheFactory) {
-
   return $cacheFactory('properties');
 });
 
