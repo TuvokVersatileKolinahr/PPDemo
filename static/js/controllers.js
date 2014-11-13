@@ -27,7 +27,7 @@ ppControllers.controller('EditController', ['$scope', '$http', 'config', '$route
    * @param Object the property
    */
   $scope.update = function(property) {
-    var aArguments    = [$scope.propertyId, "\"Test 123\""];
+    var aArguments    = [$scope.selected.primaryKey, "\""+$scope.selected.name+"\""];
     $http.post(config.baseUrl + config.serviceUrl, {method:config.executeMethodSave, args: aArguments}).
       success(  function(data, status, headers, config) {
         $scope.properties = data.result;
