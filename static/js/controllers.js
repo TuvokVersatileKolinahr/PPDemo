@@ -36,7 +36,8 @@ ppControllers.controller('EditController', ['$scope', '$http', 'config', '$route
 
         console.log('Got ' + $scope.properties.length + ' properties');
 
-        drawMarkers();
+        // drawMarkers();
+        $location.path( "/" );
       }).
       error(function(data, status, headers, config) {
         console.error('Could not retrieve properties from server...');
@@ -185,10 +186,14 @@ ppControllers.controller('MainController', ['$scope', '$http', 'config', 'dataCa
    * @return String file url
    */
   function _fixPhotoRef(ref) {
+    var imgurl = '/static/buildings/no_image.jpg';
     if (ref)
-      return ref.split('webapps')[1].replace(/\\/g, '/');
-    else
-      return '/static/buildings/no_image.jpg'
+      imgurl = ref.split('webapps')[1].replace(/\\/g, '/');
+
+    if (config.localdev)
+      imgurl = imgurl.slice(1);
+
+    return imgurl;
   }
 
   /**
