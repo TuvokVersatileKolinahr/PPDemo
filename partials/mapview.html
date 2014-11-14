@@ -1,6 +1,6 @@
 
     <!-- Controls -->
-    <header class="top clearfix"><h1>My Properties ({{properties.length}})</h1></header>
+    <header class="header clearfix"><h1>My Properties ({{properties.length}})</h1></header>
 
     <section class="list">
       <div class="header">  
@@ -28,28 +28,42 @@
       </ul>
     </section>
 
-    <section class="card" ng-class="{open : showInfo}">
-    <div class="card_handle">
-      <a href="#" ng-click="clear($event)" class="close">&times;</a>
-    </div>
-      <div class="card_content">
-        <div class="header">
-          <h2>Info</h2>
-        </div>
-        <h3>{{selected.name}}</h3>
-        <p class="type">{{selected.code}}</p>
-        <img ng-src="{{selected.photoref}}" alt="{{selected.code}}" />
-        <div class="header sub">
-          <h2>Object data</h2>
-        </div>
-        <span>Cadstral area: {{selected.cadastralArea|num}} m<sup>2</sup></span><br>
-        <span>Area built on: {{selected.areabuilton|num}} m<sup>2</sup></span><br>
-        <span>Cadastral number: {{selected.cadastralNumbers}}</span><br>
-        <div class="header sub">
-          <h2>Financial data</h2>
-        </div>
-        <span>Annual ground rent: &#8364;{{selected.groundrent|num}}.-</span><br>
+    <section class="details" ng-class="{open : showInfo}">
+      <div class="handle">
+        <a href="#" ng-click="clear($event)" class="close">&times;</a>
       </div>
+
+      <h2 class="header"> Details {{selected.name}}</h2> 
+
+      <div class="img-holder">
+        <img ng-src="{{selected.photoref}}" alt="{{selected.code}}" />
+      </div>
+
+      <div class="content">
+
+        <div class="field">
+          <p class="label">{{selected.code}}</p>
+          <p class="value">{{selected.name}}</p>
+        </div>
+        <div class="field">
+          <p class="label">Cadstral area:</p>
+          <p class="value">&#8364;{{selected.groundrent|num}}.-</p>
+        </div>
+        <div class="field">
+          <p class="label">Area built on: </p>
+          <p class="value">&#8364;{{selected.groundrent|num}}.-</p>
+        </div>
+        <div class="field">
+          <p class="label">Cadastral number:</p>
+          <p class="value">&#8364;{{selected.groundrent|num}}.-</p>
+        </div>
+        <div class="field">
+          <p class="label">Annual ground rent: </p>
+          <p class="value">&#8364;{{selected.groundrent|num}}.-</p>
+        </div>
+
+      </div>
+
       <a href="#/properties/{{selected.code}}" class="button">EDIT</a>
     </section>
 

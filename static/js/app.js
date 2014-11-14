@@ -1,7 +1,7 @@
 angular.module('propertypassport.config',[])
   .constant('config', {
     'version': 0.2,
-    'localdev': false,
+    'localdev': true,
     'serviceUrl': '/REST/FrameUI/demo/demo_webclient/',
     'buildingServiceName': 'BuildingService',
     'executeMethodGetList': 'getAllProperties',
