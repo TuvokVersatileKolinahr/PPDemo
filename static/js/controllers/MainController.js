@@ -4,21 +4,41 @@
 app.controller('MainController', function($scope, $http, config, PropertyData, MapService){
 
   /** --- local variables --- **/
-  $scope.properties = new PropertyData();
 
   /**
    * Initializes the map
    */
   var map = MapService.initialize();
-
-  $scope.$watch("properties", function(newValue, oldValue) {
-    if ($scope.properties) {
-      console.log('Resultset is loaded', $scope.properties.result);
-    }
-  });
+  var markers = [];
+  var propertyPromise = function() {
+    PropertyData.getProperties()
+      .then(function(data) {
+        // promise fulfilled
+        if (data.result.length > 0) {
+          $scope.properties = data.result;
+          markers = MapService.drawMarkers(map, data.result);
+          for (var i = markers.length - 1; i >= 0; i--) {
+            var marker = markers[i];
+            // // wrap inside a closure to keep reference to the right marker...
+            (function(marker){
+              google.maps.event.addListener(marker, 'click', function() {
+                // show side panel
+                $scope.$apply(function(){
+                  $scope.showInfo = true;
+                  $scope.selectMarker(marker.id);
+                });
+              });
+            })(marker);
+          };
+        } else {
+          console.log("Received no properties.");
+        }
+      }, function(error) {
+        console.error("Error fetching properties", error);
+      });
+  };
+  propertyPromise();
   
-  // var markers = MapService.drawMarkers(map, $scope.properties.result);
-
   /** --- public methods --- **/
 
   /**
@@ -75,6 +95,7 @@ app.controller('MainController', function($scope, $http, config, PropertyData, M
       $scope.showInfo = !$scope.showInfo;
     }
   }
+
   /**
    * Clears the info of a marker with a specific ID
    *

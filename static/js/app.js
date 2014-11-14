@@ -6,7 +6,7 @@ angular.module('propertypassport.config',[])
     'serviceUrl': '/REST/FrameUI/demo/demo_webclient/SensorService',
     'executeMethodGetList': 'getAllProperties',
     'executeMethodSave': 'putAllProperties',
-    'cache_refresh': 100000000000
+    'cache_refresh': 300000 // 5 minutes
   })
 /**
  * Demo app for the Planon Property Passport
@@ -33,7 +33,7 @@ app.config(function($routeProvider) {
 /**
  * Frontend cache, used for minification of the data traffic between front-end and backend and communication between controllers
  */
-app.factory('dataCache', function($cacheFactory) {
+app.factory('propertyCache', function($cacheFactory) {
   return $cacheFactory('properties');
 });
 
