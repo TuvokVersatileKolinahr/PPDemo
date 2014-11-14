@@ -14,7 +14,7 @@
             </div>
             <p>{{property.code}}</p>
             <p>{{property.name}}</p>
-            <p ng-switch={{property.usage}} class="type">
+            <p ng-switch on={{property.usage}} class="type">
               <span ng-switch-when='1'>Church</span>
               <span ng-switch-when='2'>Museum</span>
               <span ng-switch-when='3'>Shop</span>
