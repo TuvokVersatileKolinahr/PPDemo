@@ -2,8 +2,8 @@ angular.module('propertypassport.config',[])
   .constant('config', {
     'version': 0.2,
     'localdev': false,
-    'baseUrl': 'http://pc06698',
-    'serviceUrl': '/REST/FrameUI/demo/demo_webclient/SensorService',
+    'serviceUrl': '/REST/FrameUI/demo/demo_webclient/',
+    'buildingServiceName': 'BuildingService',
     'executeMethodGetList': 'getAllProperties',
     'executeMethodSave': 'putAllProperties',
     'cache_refresh': 1

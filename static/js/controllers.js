@@ -28,7 +28,7 @@ ppControllers.controller('EditController', function($scope, $http, config, $rout
    */
   $scope.update = function(property) {
     var aArguments    = [$scope.selected.primaryKey, "\""+$scope.selected.name+"\""];
-    $http.post(config.baseUrl + config.serviceUrl, {method:config.executeMethodSave, args: aArguments}).
+    $http.post(config.serviceUrl + config.buildingServiceName, {method:config.executeMethodSave, args: aArguments}).
       success(  function(data, status, headers, config) {
         $scope.properties = data.result;
         dataCache.put('properties.list', data.result);
@@ -241,7 +241,7 @@ ppControllers.controller('MainController', function($scope, $http, config, dataC
           console.error('Could not retrieve properties from server...');
         });        
     } else {
-      $http.post(config.baseUrl + config.serviceUrl, {method:config.executeMethodGetList}).
+      $http.post(config.serviceUrl + config.buildingServiceName, {method:config.executeMethodGetList}).
         success( _handleProperties ).
         error(function(data, status, headers, config) {
           console.error('Could not retrieve properties from server...');
