@@ -12,6 +12,7 @@
             <div class="image">
               <img ng-src="{{property.photoref}}" alt="{{property.code}}" />
             </div>
+            <p>{{property.code}}</p>
             <p>{{property.name}}</p>
             <p ng-switch={{property.usage}} class="type">
               <span ng-switch-when='1'>Church</span>
