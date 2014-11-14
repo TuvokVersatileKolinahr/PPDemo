@@ -1,14 +1,23 @@
 /**
  * MainController. Responsible fot the 'mapview'.
  */
-app.controller('MainController', function($scope, $http, config, PropertyData){
+app.controller('MainController', function($scope, $http, config, PropertyData, MapService){
 
   /** --- local variables --- **/
-
-  var map, markers = [];
-  // var properties = dataCache.get('properties.list');
-
   $scope.properties = new PropertyData();
+
+  /**
+   * Initializes the map
+   */
+  var map = MapService.initialize();
+
+  $scope.$watch("properties", function(newValue, oldValue) {
+    if ($scope.properties) {
+      console.log('Resultset is loaded', $scope.properties.result);
+    }
+  });
+  
+  // var markers = MapService.drawMarkers(map, $scope.properties.result);
 
   /** --- public methods --- **/
 
@@ -78,55 +87,5 @@ app.controller('MainController', function($scope, $http, config, PropertyData){
       event.preventDefault();
     }
   }
-
-  /** --- private methods --- **/
-
-  /**
-   * Initializes the map
-   */
-  function _initialize() {
-    var mapOptions = {
-      center: { lat: 51.845794, lng: 5.863969 }, //Nijmegen
-      zoom: 16,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      disableDefaultUI: true
-    };
-    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-  }
-
-  /**
-   * Draws markers on the map
-   */
-  function _drawMarkers () {
-    for (var t = 0; t < $scope.properties.length; t++) {
-      var property = $scope.properties[t];
-      var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(property.comment.split(",")[0], property.comment.split(",")[1]),
-        id: property.code, // set the ID for lookup purposes, @see selectMarker
-        title: property.name,
-        icon: 'static/img/marker.png',
-        map: map
-      });
-      markers.push(marker);
-
-      // wrap inside a closure to keep reference to the right marker...
-      (function(marker){
-        google.maps.event.addListener(marker, 'click', function() {
-         
-          // show side panel
-          $scope.$apply(function(){
-            $scope.showInfo = true;
-            $scope.selectMarker(marker.id);
-          });
-        });
-      })(marker);
-    }
-  }
-
-  /**
-   * Initializes the map
-   */
-  _initialize();
-
 
 });

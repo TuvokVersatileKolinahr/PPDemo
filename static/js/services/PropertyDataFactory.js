@@ -1,4 +1,4 @@
-app.factory('PropertyData', function($http, config, dataCache) {
+app.factory('PropertyData', function($rootScope, $http, config, dataCache) {
   //Define the PropertyData function
   var PropertyData = function() {
     /**
@@ -48,6 +48,7 @@ app.factory('PropertyData', function($http, config, dataCache) {
           response.data.result[i].photoref = _fixPhotoRef(response.data.result[i].photoref);
         }
         angular.extend(self, response.data);
+        $rootScope.$apply
       });
 
     }
