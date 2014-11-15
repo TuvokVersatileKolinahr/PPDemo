@@ -27,7 +27,7 @@ function getTempGraph (data_url) {
       .x(function(d) { return x(d.time); })
       .y(function(d) { return y(d.temp); });
 
-  var svg = d3.select(".card").append("svg")
+  var svg = d3.select(".graph").append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
     .append("g")
@@ -75,5 +75,5 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
     }
 }
 function removeTempGraph () {
-  document.getElementsByClassName('card')[0].getElementsByTagName('svg').remove();
+  document.getElementsByClassName('graph')[0].getElementsByTagName('svg').remove();
 }
