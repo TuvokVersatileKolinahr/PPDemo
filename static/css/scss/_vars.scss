@@ -10,7 +10,8 @@ $font-size-h4: .8em;
 
 $text-color: #666666;
 $selected-color: #1464a1;
-$border-color: #D4D5D6;
+$light-color: #D4D5D6;
+$border-color: $light-color;
 $background-color: #f2f2f2;
 $background-color-light: #ffffff;
 $filter-color: #86bfdc;

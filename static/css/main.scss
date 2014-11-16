@@ -41,7 +41,11 @@ header{
     font-size: $font-size-h1;
     font-weight: lighter;
     line-height: 1.8;
-    padding-left: 15px + 18px + 15px; // margin + img width + margin
+    padding: 5px 0 5px 48px;
+  }
+  .count{
+    font-size: $font-size-h4;
+    color: $light-color;
   }
 }
 
