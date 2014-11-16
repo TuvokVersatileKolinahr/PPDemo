@@ -1,0 +1,25 @@
+
+
+$main-font: "Open Sans";
+$font-size: 1em;
+$font-size-h1: 1.3em;
+$font-size-h2: 1.2em;
+$font-size-h3: $font-size;
+$font-size-h4: .8em;
+
+$text-color: #666666;
+$selected-color: #1464a1;
+$border-color: #D4D5D6;
+$background-color: #f2f2f2; 
+$filter-color: #86bfdc;
+
+.clearfix {
+  &:after {
+      content: ".";
+	  display: block;
+	  clear: both;
+	  visibility: hidden;
+	  line-height: 0;
+	  height: 0;
+  }
+}

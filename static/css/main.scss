@@ -1,31 +1,32 @@
 
 @import 'scss/reset';
+@import 'scss/vars';
 
-@font-face{font-family:"Open Sans";src:local("Open Sans Light"),local("OpenSans-Light"),url("../fonts/opensans/OpenSans-Light.woff") format("woff")}
+@font-face{font-family:$main-font;src:local("Open Sans Light"),local("OpenSans-Light"),url("../fonts/opensans/OpenSans-Light.woff") format("woff")}
 
 /* Module */
-html, body{height: 100%;overflow:hidden;}
+html, body{height: 100%; overflow:hidden;}
 .list, .map{height: 100%;}
 body, input, textarea, select{
-  color: #666666;
-  font-family:"Open Sans";
-  font-size: 1em;
+  color: $text-color;
+  font-family: $main-font;
+  font-size: $font-size;
   -webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;
 }
 ::-webkit-input-placeholder{
-  color: #666666;
+  color: $text-color;
   font-style: italic;
 }
 ::-ms-input-placeholder{
-  color:#666666;
+  color:$text-color;
   font-style: italic;
 }
 ::-moz-placeholder{
-  color:#666666;
+  color:$text-color;
   font-style: italic;
 }
 ::placeholder{
-  color:#666666;
+  color:$text-color;
   font-style: italic;
 }
 
@@ -35,7 +36,7 @@ header{
   z-index: 100;
  
   h1{
-    font-size: 1.3em;
+    font-size: $font-size-h1;
     font-weight: lighter;
     line-height: 1.8;
     padding-left: 64px;
@@ -45,7 +46,7 @@ header{
 }
 
 .details{
-  background: #F2F2F2;
+  background: $background-color;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
   height: 100%;
   margin-left: 99%;
@@ -68,7 +69,7 @@ header{
   }
   &.open .close{
     display: inline;
-    font-size: 1.1em;
+    font-size: $font-size;
     opacity: .5;
     padding-left: 4px;
     text-decoration: none;
@@ -76,11 +77,11 @@ header{
   }
   
   .header{
-    font-size: 1.2em;
+    font-size: $font-size-h2;
     padding: 10px 0 10px 10px;
   }
   .handle{
-    background-color: #f2f2f2;
+    background-color: $background-color;
     border-radius: 2px 0 0 2px;
     box-shadow: -2px 0 4px 0 rgba(0, 0, 0, 0.3);
     left: -17px;
@@ -102,7 +103,7 @@ header{
 }
 
 .field{
-  border-bottom: 1px solid #D3D3D3;
+  border-bottom: 1px solid $border-color;
   padding: 5px;
 
   @extend .clearfix;
@@ -115,7 +116,6 @@ header{
   }
 }
 
-
 .list{
   background: rgba(255,255,255,.7);
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
@@ -124,75 +124,73 @@ header{
   position: absolute;
   width: 25%;
   z-index: 1;
+
+  .header{
+    padding: 6px 12px 6px;
+
+    .filter{
+      border: 6px solid $filter-color;
+      border-radius: 3px;
+      padding: 0 6px;
+      width: 100%;
+    }
+  }
+
+  li{
+    padding: 2px 12px;
+  }
+  .item{
+    background: #ffffff;
+    border: 1px solid $border-color;
+    color: $text-color;
+    cursor: pointer;
+    padding: 5px;
+    list-style-type: none;
+
+    &.item.active{
+      background: $selected-color;
+      color: #fff;
+
+      .image{
+        border-color: #398AC7;
+      }
+    }
+    .type{
+      font-size: $font-size-h4;
+    }
+    p {
+      padding: 5px 0;
+    }
+    /* First 2 lines per item shoudl be bold */
+   p:first-of-type, p:nth-of-type(2){
+      font-weight: bold;
+    }
+  }
+  .image{
+    border: 3px solid #ffffff;
+    border-radius: 50%;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+    float: left;
+    height: 75px;
+    margin-left: 5px;
+    margin-right: 10px;
+    overflow: hidden;
+    text-align: center;
+    width: 75px;
+
+    img{
+      transform: translateY(-50%) translateX(-50%); /* take the middle of the image */
+    }
+  } 
 }
-.list .header{
-  padding: 6px 12px 6px;
-}
-.list .header h2{
-  border-bottom: 1px dotted #999999;
-  font-size: 1.2em;
-  padding-bottom: 10px;
-}
-.list .header .filter{
-  border: 6px solid #86bfdc;
-  border-radius: 3px;
-  padding: 0 6px;
-  width: 100%;
-}
-.list li{
-  padding: 2px 12px;
-}
-.list .item{
-  background: #ffffff;
-  border: 1px solid #D4D5D6;
-  color: #666666;
-  cursor: pointer;
-  padding: 5px;
-  list-style-type: none;
-}
-.list .item.active{
-  background: #1464A1;
-  color: #fff;
-}
-.list .item.active .image{
-  border-color: #398AC7;
-}
- p {
-  padding: 5px 0;
-}
-.list .item .type{
-  font-size: .8em;
-}
-.list .item p:first-of-type, .list .item p:nth-of-type(2){
-  font-weight: bold;
-}
-.list .image{
-  border: 3px solid #ffffff;
-  border-radius: 50%;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
-  float: left;
-  height: 75px;
-  margin-left: 5px;
-  margin-right: 10px;
-  overflow: hidden;
-  text-align: center;
-  width: 75px;
-} 
-.list .image img{
-  transform: translateY(-50%) translateX(-50%); /* take the middle of the image */
-}
+
+
 .map{
   position: absolute;
   width: 100%;
 }
-.clearfix:after{
-  content: ".";
-  display: block;
-  clear: both;
-  visibility: hidden;
-  line-height: 0;
-  height: 0;
-}
+
+
 
 .button {
   font: bold 11px Arial;
@@ -200,10 +198,7 @@ header{
   background-color: #EEEEEE;
   color: #333333;
   padding: 2px 6px 2px 6px;
-  border-top: 1px solid #CCCCCC;
-  border-right: 1px solid #333333;
-  border-bottom: 1px solid #333333;
-  border-left: 1px solid #CCCCCC;
+  border: 1px solid $border-color;
   margin-left: 21px;
 }
 .chart {
@@ -252,14 +247,4 @@ text {
 .visuals {
   height: 400px;
   width: 100%;
-}
-
-
-
-.clearfix {
-  &:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
 }
