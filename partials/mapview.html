@@ -3,6 +3,7 @@
     <header class="header"><h1>My Properties <span class="count">({{properties.length}})</span></h1></header>
 
     <section class="list">
+      <div class="scroll-wrapper">
       <div class="header">  
         <input type="text" ng-model="searchText" id="filter" class="filter" placeholder="search building"/>
       </div>
@@ -26,6 +27,7 @@
           </div>
         </li>
       </ul>
+    </div>
     </section>
 
     <section class="details" ng-class="{open : showInfo}">
@@ -33,7 +35,7 @@
         <a href="#" ng-click="clear($event)" class="close">&times;</a>
       </div>
 
-      <div class="wrapper">
+      <div class="scroll-wrapper">
 
         <h2 class="header"> Details {{selected.name}}</h2> 
 
@@ -68,7 +70,7 @@
 
         <a href="#/properties/{{selected.code}}" class="button">Edit</a>
       </div>
-      
+
     </section>
 
     <section class="map" id="map-canvas">
