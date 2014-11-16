@@ -36,12 +36,12 @@ header{
   z-index: 100;
  
   h1{
+    background: $background-color-light url(../img/header.png) no-repeat 15px center;
+    border-radius: 4px 4px 0 0;
     font-size: $font-size-h1;
     font-weight: lighter;
     line-height: 1.8;
-    padding-left: 64px;
-    background-color: #fff;
-    border-radius: 4px 4px 0 0;
+    padding-left: 15px + 18px + 15px; // margin + img width + margin
   }
 }
 
@@ -140,7 +140,7 @@ header{
     padding: 2px 12px;
   }
   .item{
-    background: #ffffff;
+    background: $background-color-light;
     border: 1px solid $border-color;
     color: $text-color;
     cursor: pointer;
@@ -149,7 +149,7 @@ header{
 
     &.item.active{
       background: $selected-color;
-      color: #fff;
+      color: $background-color-light;
 
       .image{
         border-color: #398AC7;
@@ -167,7 +167,7 @@ header{
     }
   }
   .image{
-    border: 3px solid #ffffff;
+    border: 3px solid $background-color-light;
     border-radius: 50%;
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
     float: left;
@@ -189,62 +189,43 @@ header{
   position: absolute;
   width: 100%;
 }
+.graph {
+  font: $secundairy-font;
+  font-size: $font-size-h4;
+  
+  rect {
+    fill: $selected-color;
+  }
+  text {
+    fill: white;
+    font: 10px sans-serif;
+    text-anchor: end;
+  }
+  .line {
+    fill: none;
+    stroke: $selected-color;
+    stroke-width: 1.5px;
+  }
 
-
+  .axis path,.axis line {
+    fill: none;
+    stroke: $text-color;
+    shape-rendering: crispEdges;
+  }
+  path {
+    stroke: $selected-color;
+    stroke-width: 2;
+    fill: none;
+  }
+  line {
+    stroke: black;
+  }
+}
 
 .button {
-  font: bold 11px Arial;
   text-decoration: none;
   background-color: #EEEEEE;
   color: #333333;
   padding: 2px 6px 2px 6px;
   border: 1px solid $border-color;
-  margin-left: 21px;
-}
-.chart {
-  font: 10px sans-serif;
-}
-
-.chart rect {
-  fill: steelblue;
-}
-
-.chart text {
-  fill: white;
-  font: 10px sans-serif;
-  text-anchor: end;
-}
-
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-
-.line {
-  fill: none;
-  stroke: steelblue;
-  stroke-width: 1.5px;
-}
-.graph-svg-component {
-  background-color: AliceBlue;
-}
-path {
-  stroke: steelblue;
-  stroke-width: 2;
-  fill: none;
-}
- 
-line {
-  stroke: black;
-}
- 
-text {
-  font-family: Arial;
-  font-size: 9pt;
-}
-.visuals {
-  height: 400px;
-  width: 100%;
 }
