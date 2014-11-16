@@ -134,6 +134,8 @@ header{
   width: 25%;
   z-index: 1;
 
+  @include user-select(none);
+
   .header{
     padding: 6px 12px 6px;
 
