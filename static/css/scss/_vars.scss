@@ -8,12 +8,17 @@ $font-size-h3: .9em;
 $font-size-h4: $font-size-smaller;
 
 $text-color: #666666;
+$text-color-light: #FFFFFF;
 $selected-color: #1464a1;
 $light-color: #D4D5D6;
 $border-color: $light-color;
+$input-border-color: #e5e5e5;
 $background-color: #f2f2f2;
 $background-color-light: #ffffff;
 $filter-color: #86bfdc;
+$grouping-color: #87A3C1;
+$background-btn-cancel: #C4C4C4;
+$background-btn-save: #1B659E;
 
 .clearfix {
   &:after {
@@ -57,4 +62,11 @@ $filter-color: #86bfdc;
 	    color: $color; 
 	    background: $background;
 	}
+}
+
+@mixin background-cover(){
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }

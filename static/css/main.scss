@@ -101,6 +101,9 @@ header{
     position: absolute;
     top: 155px;
   }
+  .field .label{
+    width: 40%;
+  }
   .img-holder{
       max-height: 250px;
       overflow: hidden;
@@ -114,25 +117,7 @@ header{
   }
 }
 
-.group{
-  padding: 5px;
-}
-.field{
-  border-bottom: 1px solid $border-color;
-  padding: 5px;
 
-  @extend .clearfix;
-
-  .label{
-    display: block;
-    float: left;
-    font-weight: bold;
-    width: 40%;
-  }
-  .value{
-    font-size: $font-size-smaller;
-  }
-}
 
 .scroll-wrapper{
   height: 100%;
@@ -256,10 +241,108 @@ header{
   }
 }
 
+
+.group{
+  padding: 5px;
+}
+.field{
+  padding: 5px 0;
+  position: relative;
+
+  &.readonly{
+    border-bottom: 1px solid $border-color;
+  }
+
+  @extend .clearfix;
+
+  .label{
+    display: block;
+    float: left;
+    font-weight: bold;
+    padding-top: 4px;
+    width: 25%;
+  }
+  .prefix, .postfix{
+      padding-top: 5px;
+      position: absolute;
+  }
+  .prefix{
+    left: 0;
+    text-align: right;
+    width: 25%;
+  }
+  .value{
+    font-size: $font-size-smaller;
+    margin-top: 7px;
+  }
+}
+input{
+  border: 1px solid $input-border-color;
+  border-radius: 3px;
+}
+.button-group{
+  border-top: 1px solid $light-color;
+  margin-top: 18px;
+  padding: 14px 0;
+}
 .button {
-  text-decoration: none;
-  background-color: #EEEEEE;
-  color: #333333;
-  padding: 2px 6px;
+  background-color: $background-btn-cancel;
   border: 1px solid $border-color;
+  border-radius: 3px;
+  color: #333333;
+  padding: 4px 10px;
+  text-decoration: none;
+
+  &.save{
+    background-color: $background-btn-save;
+    color: $text-color-light;
+  }
+  &.cancel{
+    
+  }
+}
+
+
+.full-image{
+  background-repeat:no-repeat;
+  background-position: center center;
+  float: left;
+  height: 100%;
+  width: 25%;
+
+  @include background-cover();
+}
+
+.edit{
+  background-color: $background-color;
+  height: 100%;
+}
+.edit-details{
+  float: left;
+  height: 100%;
+  margin: 0 10%;
+  min-width: 500px;
+  position: relative;
+  width: 35%;
+
+  input{
+    width: 75%;
+  }
+}
+
+.fully-centered{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+}
+
+.form-header{
+  font-weight: bold;
+}
+
+.field-group{
+  color: $grouping-color;
+  margin-bottom: 12px;
+  margin-top: 25px;
 }

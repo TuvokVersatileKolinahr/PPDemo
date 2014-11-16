@@ -1,15 +1,55 @@
-<div>
-  <h2 class="header">{{selected.name}}</h2>
-  <img ng-src="{{selected.photoref}}" alt="{{selected.code}}" />
+  <div class="edit">
+   <header class="header"><h1>Edit details</h1></header>
+
+   <div class="full-image" style="background-image: url(http://localhost/git/PPDemo/static/buildings/fuik.jpg)">
+
+   </div>
+
+   <div class="edit-details">
+
+    <form novalidate class="fully-centered">
+
+      <h2 class="form-header">Edit details</h2>
+
+      <h3 class="field-group"> General </h3>
+
+      <div class="field">
+        <label class="label" >Code</label> 
+        <span id="selected_code">{{selected.name}}</span>
+      </div>
+
+      <div class="field">
+        <label class="label" for="selected_name">Name</label> 
+        <input  type="text" ng-model="selected.name" id="selected_name" />
+      </div>
+
+      <h3 class="field-group"> Details </h3>
+
+      <div class="field">
+        <label class="label" for="selected_groundrent">Cadstral area</label>
+        <span class="prefix">&#8364;</span><input id="selected_groundrent" ng-model="selected.groundrent|num."><span class="postfix">.-</span>
+      </div>
+      <div class="field">
+        <label class="label" for="selected_groundrent">Area built on </label>
+        <span class="prefix">&#8364;</span><input id="selected_groundrent" ng-model="selected.groundrent|num"><span class="postfix">.-</span>
+      </div>
+      <div class="field">
+        <label class="label" for="selected_groundrent">Cadastral number</label>
+        <span class="prefix">&#8364;</span><input id="selected_groundrent" ng-model="selected.groundrent|num"><span class="postfix">.-</span>
+      </div>
+      <div class="field">
+        <label class="label" for="selected_groundrent">Annual ground rent </label>
+        <span class="prefix">&#8364;</span><input id="selected_groundrent" ng-model="selected.groundrent|num"> <span class="postfix">.-</span>
+      </div>
+
+
+      <div class="button-group">
+        <a href="#/properties" class="button cancel">Cancel &amp; go back</a>
+
+        <a href ng-click="update(selected)" class="button save">Save changes</a>
+      </div>
+
+    </form>
+    
+    </div> 
 </div>
-
-<form novalidate class="simple-form">
-  Name: <input type="text" ng-model="selected.name" /><br />
-  
-  <div class="group">
-	  <a href="#/properties">back</a>
-
-	  <button ng-click="update(selected)" class="button">save</button>
-  </div>
-</form>
-
