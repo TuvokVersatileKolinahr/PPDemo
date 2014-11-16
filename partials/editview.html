@@ -1,13 +1,15 @@
 <div>
-  <div class="header">
-    <h2>{{selected.name}}</h2>
-  </div>
+  <h2 class="header">{{selected.name}}</h2>
   <img ng-src="{{selected.photoref}}" alt="{{selected.code}}" />
 </div>
 
 <form novalidate class="simple-form">
   Name: <input type="text" ng-model="selected.name" /><br />
-  <button ng-click="update(selected)">SAVE</button>
+  
+  <div class="group">
+	  <a href="#/properties">back</a>
+
+	  <button ng-click="update(selected)" class="button">save</button>
+  </div>
 </form>
 
-<a href="#/properties">BACK</a>

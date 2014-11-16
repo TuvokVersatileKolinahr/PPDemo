@@ -114,6 +114,9 @@ header{
   }
 }
 
+.group{
+  padding: 5px;
+}
 .field{
   border-bottom: 1px solid $border-color;
   padding: 5px;
@@ -257,6 +260,6 @@ header{
   text-decoration: none;
   background-color: #EEEEEE;
   color: #333333;
-  padding: 2px 6px 2px 6px;
+  padding: 2px 6px;
   border: 1px solid $border-color;
 }
