@@ -64,6 +64,21 @@ app.factory('PropertyData', function($http, $q, config, propertyCache) {
           // something went wrong
           return $q.reject(response.data);
       });
+    },
+    updateProperty: function(id, name) {
+      var arguments    = [id, name];
+      return $http.post(config.baseUrl + config.serviceUrl, {method:config.executeMethodSave, args: arguments}).
+        then(function(response) {
+          if (typeof response.data === 'object') {
+            return response.data;
+          } else {
+            // invalid response
+            return $q.reject(response.data);
+          }
+        }, function(response) {
+          // something went wrong
+          return $q.reject(response.data);
+        });
     }
 
   };
