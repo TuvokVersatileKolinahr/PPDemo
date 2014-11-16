@@ -198,6 +198,7 @@ header{
   position: absolute;
   width: 100%;
 }
+
 .graph {
   font: $secundairy-font;
   font-size: $font-size-h4;
@@ -206,8 +207,7 @@ header{
     fill: $selected-color;
   }
   text {
-    fill: white;
-    font: 10px sans-serif;
+    font-family: $secundairy-font;
     text-anchor: end;
   }
   .line {
