@@ -33,38 +33,42 @@
         <a href="#" ng-click="clear($event)" class="close">&times;</a>
       </div>
 
-      <h2 class="header"> Details {{selected.name}}</h2> 
+      <div class="wrapper">
 
-      <div class="img-holder">
-        <img ng-src="{{selected.photoref}}" alt="{{selected.code}}" />
+        <h2 class="header"> Details {{selected.name}}</h2> 
+
+        <div class="img-holder">
+          <img ng-src="{{selected.photoref}}" alt="{{selected.code}}" />
+        </div>
+
+        <div class="content">
+
+          <div class="field">
+            <p class="label">{{selected.code}}</p>
+            <p class="value">{{selected.name}}</p>
+          </div>
+          <div class="field">
+            <p class="label">Cadstral area:</p>
+            <p class="value">&#8364;{{selected.groundrent|num}}.-</p>
+          </div>
+          <div class="field">
+            <p class="label">Area built on: </p>
+            <p class="value">&#8364;{{selected.groundrent|num}}.-</p>
+          </div>
+          <div class="field">
+            <p class="label">Cadastral number:</p>
+            <p class="value">&#8364;{{selected.groundrent|num}}.-</p>
+          </div>
+          <div class="field">
+            <p class="label">Annual ground rent: </p>
+            <p class="value">&#8364;{{selected.groundrent|num}}.-</p>
+          </div>
+          <div class="graph"></div>
+        </div>
+
+        <a href="#/properties/{{selected.code}}" class="button">Edit</a>
       </div>
-
-      <div class="content">
-
-        <div class="field">
-          <p class="label">{{selected.code}}</p>
-          <p class="value">{{selected.name}}</p>
-        </div>
-        <div class="field">
-          <p class="label">Cadstral area:</p>
-          <p class="value">&#8364;{{selected.groundrent|num}}.-</p>
-        </div>
-        <div class="field">
-          <p class="label">Area built on: </p>
-          <p class="value">&#8364;{{selected.groundrent|num}}.-</p>
-        </div>
-        <div class="field">
-          <p class="label">Cadastral number:</p>
-          <p class="value">&#8364;{{selected.groundrent|num}}.-</p>
-        </div>
-        <div class="field">
-          <p class="label">Annual ground rent: </p>
-          <p class="value">&#8364;{{selected.groundrent|num}}.-</p>
-        </div>
-        <div class="graph"></div>
-      </div>
-
-      <a href="#/properties/{{selected.code}}" class="button">EDIT</a>
+      
     </section>
 
     <section class="map" id="map-canvas">

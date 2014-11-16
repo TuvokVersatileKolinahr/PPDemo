@@ -55,8 +55,9 @@ header{
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
   height: 100%;
   margin-left: 99%;
-  padding-left: 25px; /* show border when closed */
+  padding: 44px 0 12px 25px;
   position: absolute;
+  top: 0;
   transition: all 0.5s ease;
   width: 25%;
   z-index: 1;
@@ -130,8 +131,10 @@ header{
   background: rgba(255,255,255,.7);
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
   overflow: auto;
-  padding-bottom: 42px;
+  padding-top: 44px;
+  padding-bottom: 12px;
   position: absolute;
+  top: 0;
   width: 25%;
   z-index: 1;
 
@@ -199,6 +202,7 @@ header{
 
 .map{
   position: absolute;
+  top: 0;
   width: 100%;
 }
 
