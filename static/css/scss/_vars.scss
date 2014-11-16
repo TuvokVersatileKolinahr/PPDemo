@@ -3,10 +3,11 @@
 $main-font: "Open Sans";
 $secundairy-font: Arial, Helvetica, sans-serif;
 $font-size: 1em;
+$font-size-smaller: .8em;
 $font-size-h1: 1.2em;
 $font-size-h2: $font-size;
 $font-size-h3: .9em;
-$font-size-h4: .8em;
+$font-size-h4: $font-size-smaller;
 
 $text-color: #666666;
 $selected-color: #1464a1;
