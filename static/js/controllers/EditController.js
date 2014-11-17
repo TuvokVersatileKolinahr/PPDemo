@@ -37,17 +37,9 @@ app.controller('EditController', function($scope, $http, config, $routeParams, P
     PropertyData.updateProperty($scope.selected.primaryKey, "\""+$scope.selected.name+"\"")
       .then(function(data) {
         // promise fulfilled
-        if (data.result.length > 0) {
-          //TODO: After succesfull edit a cacherefresh is due
-          dataCache.put('properties.ts', 0);
-          dataCache.put('properties.list', data.result);
-        } else {
-          console.log("Received no properties.");
-        }
       }, function(error) {
         console.error("Error fetching properties", error);
       });
-    };
   };
 
 

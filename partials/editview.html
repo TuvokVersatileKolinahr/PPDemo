@@ -1,7 +1,7 @@
   <div class="edit">
    <header class="header"><h1>Edit details</h1></header>
 
-   <div class="full-image" style="background-image: url(http://localhost/git/PPDemo/static/buildings/fuik.jpg)">
+   <div class="full-image" style="background-image: url({{selected.photoref}})">
 
    </div>
 
@@ -14,32 +14,32 @@
       <h3 class="field-group"> General </h3>
 
       <div class="field">
-        <label class="label" >Code</label> 
-        <span id="selected_code">{{selected.name}}</span>
+        <label class="label">Code</label> 
+        <span id="selected_code">{{selected.propertyId}}</span>
       </div>
 
       <div class="field">
         <label class="label" for="selected_name">Name</label> 
-        <input  type="text" ng-model="selected.name" id="selected_name" />
+        <input type="text" ng-model="selected.name" id="selected_name" />
       </div>
 
       <h3 class="field-group"> Details </h3>
 
       <div class="field">
-        <label class="label" for="selected_groundrent">Cadstral area</label>
-        <span class="prefix">&#8364;</span><input id="selected_groundrent" ng-model="selected.groundrent|num."><span class="postfix">.-</span>
+        <label class="label" for="selected_cadastralNumbers">Cadastral numbers</label>
+        <span class="prefix"></span><input roudnumber id="selected_cadastralNumbers" ng-model="selected.cadastralNumbers"><span class="postfix"></span>
       </div>
       <div class="field">
-        <label class="label" for="selected_groundrent">Area built on </label>
-        <span class="prefix">&#8364;</span><input id="selected_groundrent" ng-model="selected.groundrent|num"><span class="postfix">.-</span>
+        <label class="label" for="selected_cadastralArea">Cadstral area</label>
+        <span class="prefix"></span><input roudnumber id="selected_cadastralArea" ng-model="selected.cadastralArea"><span class="postfix">m<sub>2</sub></span>
       </div>
       <div class="field">
-        <label class="label" for="selected_groundrent">Cadastral number</label>
-        <span class="prefix">&#8364;</span><input id="selected_groundrent" ng-model="selected.groundrent|num"><span class="postfix">.-</span>
+        <label class="label" for="selected_areabuilton">Area built on </label>
+        <span class="prefix"></span><input roudnumber id="selected_areabuilton" ng-model="selected.areabuilton"><span class="postfix">m<sub>2</sub></span>
       </div>
       <div class="field">
         <label class="label" for="selected_groundrent">Annual ground rent </label>
-        <span class="prefix">&#8364;</span><input id="selected_groundrent" ng-model="selected.groundrent|num"> <span class="postfix">.-</span>
+        <span class="prefix">&#8364;</span><input roudnumber id="selected_groundrent" ng-model="selected.groundrent"><span class="postfix">.-</span>
       </div>
 
 
