@@ -13,6 +13,24 @@ body, input, textarea, select{
   font-size: $font-size;
   -webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;
 }
+body{
+  /* scrollbar styling for IE */
+  scrollbar-base-color: #c2c2c2;
+  scrollbar-base-color: #c2c2c2;
+  scrollbar-3dlight-color: #c2c2c2;
+  scrollbar-highlight-color: #e0e0e0;
+  scrollbar-track-color: #e0e0e0;
+  scrollbar-arrow-color: #c2c2c2;
+  scrollbar-shadow-color: #c2c2c2;
+  scrollbar-dark-shadow-color: #e0e0e0;
+}
+/* scrollbar styling for Chrome */
+::-webkit-scrollbar { width: 9px; height: 9px;}
+::-webkit-scrollbar-button {height: 0; width: 0; background-color: #fff; }
+::-webkit-scrollbar-track-piece { background-color: #e0e0e0; border-radius: 5px;}
+::-webkit-scrollbar-thumb { background-color: #c2c2c2; border-radius: 5px;}
+::-webkit-scrollbar-corner {background-color: transparent;}
+
 ::-webkit-input-placeholder{
   color: $text-color;
   font-style: italic;
