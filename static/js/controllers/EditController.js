@@ -42,6 +42,5 @@ app.controller('EditController', function($scope, $http, config, $routeParams, P
       });
   };
 
-
 });
 
