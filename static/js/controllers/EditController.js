@@ -48,7 +48,6 @@ app.controller('EditController', function($scope, $http, config, $routeParams, P
         console.error("Error fetching properties", error);
       });
     };
-  };
 
 
 });
