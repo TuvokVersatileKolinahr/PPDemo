@@ -1,0 +1,647 @@
+### Eclipse Workspace Patch 1.0
+#P PSSM_FrameUI
+Index: src/main/java/nl/planon/pssm/frameui/definition/proxyview/IFrameUIPropertiesViewDefinition.java
+===================================================================
+RCS file: src/main/java/nl/planon/pssm/frameui/definition/proxyview/IFrameUIPropertiesViewDefinition.java
+diff -N src/main/java/nl/planon/pssm/frameui/definition/proxyview/IFrameUIPropertiesViewDefinition.java
+--- /dev/null	1 Jan 1970 00:00:00 -0000
++++ src/main/java/nl/planon/pssm/frameui/definition/proxyview/IFrameUIPropertiesViewDefinition.java	1 Jan 1970 00:00:00 -0000
+@@ -0,0 +1,28 @@
++// Planon Enterprise Edition Source file: IFrameUIPropertiesViewDefinition.java
++// Copyright Planon 1997-2014. All Rights Reserved.
++package nl.planon.pssm.frameui.definition.proxyview;
++
++import nl.planon.aphrodite.businessmodel.property.*;
++
++/**
++ * IFrameUIPropertiesViewDefinition
++ */
++public interface IFrameUIPropertiesViewDefinition
++{
++  //~ Static Variables & Initializers --------------------------------------------------------------
++
++  public static final String PVTYPE = "FrameUIPropertiesViewDefinition";
++
++  public static final String PN_PRIMARYKEY = BOPropertyDef.PN_PRIMARYKEY;
++  public static final String PN_NAME = BOPropertyDef.PN_NAME;
++  public static final String PN_CODE = BOPropertyDef.PN_CODE;
++  public static final String PN_PHOTOFILE_REF = BOPropertyDef.PN_PHOTOFILE_REF;
++  public static final String PN_COMMENT = BOPropertyDef.PN_COMMENT;
++  public static final String PN_CITY = BOPropertyDef.PN_CITY;
++  public static final String PN_USAGE = "FreeString31";
++  public static final String PN_GROUNDRENT = BOPropertyDef.PN_GROUNDRENT;
++  public static final String PN_AREABUILTON = BOPropertyDef.PN_AREABUILTON;
++  public static final String PN_CADASTRALNUMBERS = "FreeString27";
++  public static final String PN_CADASTRALAREA = BOPropertyDef.PN_CADASTRALAREA;
++  public static final String PN_TEMPERATURESENSOR_ID = "FreeString22";
++}
+Index: src/main/java/nl/planon/pssm/frameui/definition/proxyview/pvdefinition/FrameUIPVTypeFactory.java
+===================================================================
+RCS file: /data/repository/cvs-repo/PSSM_FrameUI/src/main/java/nl/planon/pssm/frameui/definition/proxyview/pvdefinition/FrameUIPVTypeFactory.java,v
+retrieving revision 1.7
+diff -u -r1.7 FrameUIPVTypeFactory.java
+--- src/main/java/nl/planon/pssm/frameui/definition/proxyview/pvdefinition/FrameUIPVTypeFactory.java	18 Feb 2014 09:01:17 -0000	1.7
++++ src/main/java/nl/planon/pssm/frameui/definition/proxyview/pvdefinition/FrameUIPVTypeFactory.java	17 Nov 2014 14:50:38 -0000
+@@ -31,6 +31,7 @@
+     register(ICasePartsWithLaunchGroupViewDefinition.PVTYPE, CasePartsWithLaunchGroupViewDefinition.class);
+     register(new PVType(IFrameUIAccountGroupByAccountViewDefinition.PVTYPE), FrameUIAccountGroupByAccountViewDefinition.class);
+     register(new PVType(IFrameUICasePartsViewDefinition.PVTYPE), FrameUICasePartsViewDefinition.class);
++    register(new PVType(IFrameUIPropertiesViewDefinition.PVTYPE), FrameUIPropertiesViewDefinition.class);
+     register(new PVType(IFrameUINavigationCasePartsViewDefinition.PVTYPE), FrameUINavigationCasePartsViewDefinition.class);
+     register(IFrameUIModuleDrillDownStepViewDefinition.PVTYPE, FrameUIModuleDrillDownStepViewDefinition.class);
+     register(new PVType(IUserInfoAccountRefPVDefinition.PVTYPE), UserInfoByAccountRefPVDefinition.class);
+Index: src/main/java/nl/planon/pssm/frameui/definition/proxyview/pvdefinition/FrameUIPropertiesViewDefinition.java
+===================================================================
+RCS file: src/main/java/nl/planon/pssm/frameui/definition/proxyview/pvdefinition/FrameUIPropertiesViewDefinition.java
+diff -N src/main/java/nl/planon/pssm/frameui/definition/proxyview/pvdefinition/FrameUIPropertiesViewDefinition.java
+--- /dev/null	1 Jan 1970 00:00:00 -0000
++++ src/main/java/nl/planon/pssm/frameui/definition/proxyview/pvdefinition/FrameUIPropertiesViewDefinition.java	1 Jan 1970 00:00:00 -0000
+@@ -0,0 +1,62 @@
++// Planon Enterprise Edition Source file: FrameUIPropertiesViewDefinition.java
++// Copyright Planon 1997-2014. All Rights Reserved.
++package nl.planon.pssm.frameui.definition.proxyview.pvdefinition;
++
++import nl.planon.aphrodite.businessmodel.*;
++
++import nl.planon.hades.basevalue.*;
++import nl.planon.hades.beans.*;
++import nl.planon.hades.exception.*;
++import nl.planon.hades.proxyview.*;
++import nl.planon.hades.searchcriteria.operator.*;
++
++import nl.planon.pssm.frameui.definition.proxyview.*;
++
++/**
++ * FrameUIPropertiesViewDefinition
++ */
++public class FrameUIPropertiesViewDefinition extends PVDefinition implements IFrameUIPropertiesViewDefinition
++{
++  //~ Instance Variables ---------------------------------------------------------------------------
++
++  private final String city = "Nijmegen";
++
++  //~ Constructors ---------------------------------------------------------------------------------
++
++  /**
++   * Creates a new FrameUIPropertiesViewDefinition object.
++   */
++  public FrameUIPropertiesViewDefinition()
++  {
++    super(BOTypeAphrodite.PROPERTY);
++  }
++
++  //~ Methods --------------------------------------------------------------------------------------
++
++  /**
++   * {@inheritDoc}
++   */
++  @Override protected void createFieldDefs(PnContext aPnContext)
++  {
++    addSelectFieldDef(PN_PRIMARYKEY);
++    addSelectFieldDef(PN_NAME);
++    addSelectFieldDef(PN_CODE);
++    addSelectFieldDef(PN_PHOTOFILE_REF);
++    addSelectFieldDef(PN_COMMENT);
++    addSelectFieldDef(PN_USAGE);
++    addSelectFieldDef(PN_GROUNDRENT);
++    addSelectFieldDef(PN_AREABUILTON);
++    addSelectFieldDef(PN_CADASTRALNUMBERS);
++    addSelectFieldDef(PN_CADASTRALAREA);
++    addSelectFieldDef(PN_TEMPERATURESENSOR_ID);
++  }
++
++
++  /**
++   * {@inheritDoc}
++   */
++  @Override protected void createWhereDefs(PnContext aPnContext) throws PnErrorListException
++  {
++    addWhereDef(PN_CITY, SCOperatorType.EQUAL, new BaseStringValue(this.city));
++  }
++}
+Index: src/main/java/nl/planon/pssm/frameui/engine/wicket/FrameUIServicesRegistry.java
+===================================================================
+RCS file: /data/repository/cvs-repo/PSSM_FrameUI/src/main/java/nl/planon/pssm/frameui/engine/wicket/FrameUIServicesRegistry.java,v
+retrieving revision 1.4
+diff -u -r1.4 FrameUIServicesRegistry.java
+--- src/main/java/nl/planon/pssm/frameui/engine/wicket/FrameUIServicesRegistry.java	6 Oct 2014 14:25:45 -0000	1.4
++++ src/main/java/nl/planon/pssm/frameui/engine/wicket/FrameUIServicesRegistry.java	17 Nov 2014 14:50:38 -0000
+@@ -26,5 +26,6 @@
+ 
+     register(IFrameService.class, FrameService.class);
+     register(IFrameUIDataSectionService.class, FrameUIDataSectionServiceImpl.class);
++    register(IBuildingService.class, BuildingService.class);
+   }
+ }
+Index: src/main/java/nl/planon/pssm/frameui/engine/wicket/services/IBuildingService.java
+===================================================================
+RCS file: src/main/java/nl/planon/pssm/frameui/engine/wicket/services/IBuildingService.java
+diff -N src/main/java/nl/planon/pssm/frameui/engine/wicket/services/IBuildingService.java
+--- /dev/null	1 Jan 1970 00:00:00 -0000
++++ src/main/java/nl/planon/pssm/frameui/engine/wicket/services/IBuildingService.java	1 Jan 1970 00:00:00 -0000
+@@ -0,0 +1,44 @@
++// Planon Enterprise Edition Source file: IBuildingService.java
++// Copyright Planon 1997-2014. All Rights Reserved.
++package nl.planon.pssm.frameui.engine.wicket.services;
++
++import java.util.*;
++
++import nl.planon.hades.exception.*;
++
++import nl.planon.pss.wicket.webservice.interfaces.*;
++
++import nl.planon.pssm.frameui.engine.wicket.services.dto.*;
++
++/**
++ * IBuildingService
++ *
++ * @version $Revision: 1.16 $
++ */
++public interface IBuildingService extends IPssWebService
++{
++  //~ Methods --------------------------------------------------------------------------------------
++
++  /**
++   * Retrieves all properties
++   *
++   * @return A string containing all properties
++   *
++   * @throws PnErrorListException on error
++   */
++  public List<PropertyInformation> getAllProperties() throws PnErrorListException;
++
++
++  /**
++   * /** Saves the supplied name for the property with id
++   *
++   * @param  aBoid     the id of the bo
++   * @param  aProperty aName the new name
++   *
++   * @return A string containing all saved properties
++   *
++   * @throws PnErrorListException on error
++   * @throws BOMNotFoundException
++   */
++  public List<PropertyInformation> putAllProperties(String aBoid, Object aProperty) throws PnErrorListException, BOMNotFoundException;
++}
+Index: src/main/java/nl/planon/pssm/frameui/engine/wicket/services/dto/PropertyInformation.java
+===================================================================
+RCS file: src/main/java/nl/planon/pssm/frameui/engine/wicket/services/dto/PropertyInformation.java
+diff -N src/main/java/nl/planon/pssm/frameui/engine/wicket/services/dto/PropertyInformation.java
+--- /dev/null	1 Jan 1970 00:00:00 -0000
++++ src/main/java/nl/planon/pssm/frameui/engine/wicket/services/dto/PropertyInformation.java	1 Jan 1970 00:00:00 -0000
+@@ -0,0 +1,267 @@
++// Planon Enterprise Edition Source file: PropertyInformation.java
++// Copyright Planon 1997-2014. All Rights Reserved.
++package nl.planon.pssm.frameui.engine.wicket.services.dto;
++
++/**
++ * Simple POJO containing essential properties of a property with some PropertyInformation
++ */
++public class PropertyInformation
++{
++  //~ Instance Variables ---------------------------------------------------------------------------
++
++  private String areabuilton;
++  private String cadastralArea;
++  private String cadastralNumbers;
++  private String code;
++  private String comment;
++  private String groundrent;
++  private String name;
++  private String photoref;
++
++  private String primaryKey;
++  private String tempSensorId;
++  private String usage;
++
++  //~ Methods --------------------------------------------------------------------------------------
++
++  /**
++   * Gets the area
++   *
++   * @return the areabuilton
++   */
++  public String getAreabuilton()
++  {
++    return this.areabuilton;
++  }
++
++
++  /**
++   * Gets the area
++   *
++   * @return the cadastralArea
++   */
++  public String getCadastralArea()
++  {
++    return this.cadastralArea;
++  }
++
++
++  /**
++   * Gets the numbers
++   *
++   * @return the cadastralNumbers
++   */
++  public String getCadastralNumbers()
++  {
++    return this.cadastralNumbers;
++  }
++
++
++  /**
++   * Returns the code
++   *
++   * @return a code
++   */
++  public String getCode()
++  {
++    return this.code;
++  }
++
++
++  /**
++   * Returns the comment
++   *
++   * @return a comment
++   */
++  public String getComment()
++  {
++    return this.comment;
++  }
++
++
++  /**
++   * Gets the rent
++   *
++   * @return the groundrent
++   */
++  public String getGroundrent()
++  {
++    return this.groundrent;
++  }
++
++
++  /**
++   * Returns the name
++   *
++   * @return a name
++   */
++  public String getName()
++  {
++    return this.name;
++  }
++
++
++  /**
++   * Returns the photoref
++   *
++   * @return a photoref
++   */
++  public String getPhotoref()
++  {
++    return this.photoref;
++  }
++
++
++  /**
++   * Returns the primary Key
++   *
++   * @return the primaryKey
++   */
++  public String getPrimaryKey()
++  {
++    return this.primaryKey;
++  }
++
++
++  /**
++   * Gets the id of the tempsensor
++   *
++   * @return the tempSensorId
++   */
++  public String getTempSensorId()
++  {
++    return this.tempSensorId;
++  }
++
++
++  /**
++   * Returns teh usage
++   *
++   * @return the usage
++   */
++  public String getUsage()
++  {
++    return this.usage;
++  }
++
++
++  /**
++   * Sets the area
++   *
++   * @param aAreabuilton the areabuilton to set
++   */
++  public void setAreabuilton(String aAreabuilton)
++  {
++    this.areabuilton = aAreabuilton;
++  }
++
++
++  /**
++   * Sets the area
++   *
++   * @param aCadastralArea the cadastralArea to set
++   */
++  public void setCadastralArea(String aCadastralArea)
++  {
++    this.cadastralArea = aCadastralArea;
++  }
++
++
++  /**
++   * Sets the numbers
++   *
++   * @param aCadastralNumbers the cadastralNumbers to set
++   */
++  public void setCadastralNumbers(String aCadastralNumbers)
++  {
++    this.cadastralNumbers = aCadastralNumbers;
++  }
++
++
++  /**
++   * Sets the code
++   *
++   * @param aCode the code
++   */
++  public void setCode(String aCode)
++  {
++    this.code = aCode;
++  }
++
++
++  /**
++   * Sets the comment
++   *
++   * @param aComment the comment
++   */
++  public void setComment(String aComment)
++  {
++    this.comment = aComment;
++  }
++
++
++  /**
++   * Sets the rent
++   *
++   * @param aGroundrent the groundrent to set
++   */
++  public void setGroundrent(String aGroundrent)
++  {
++    this.groundrent = aGroundrent;
++  }
++
++
++  /**
++   * Sets the name
++   *
++   * @param aName name
++   */
++  public void setName(String aName)
++  {
++    this.name = aName;
++  }
++
++
++  /**
++   * Sets the photoref
++   *
++   * @param aPhotoref the photoref
++   */
++  public void setPhotoref(String aPhotoref)
++  {
++    this.photoref = aPhotoref;
++  }
++
++
++  /**
++   * Sets the primary Key
++   *
++   * @param aPrimaryKey the primaryKey to set
++   */
++  public void setPrimaryKey(String aPrimaryKey)
++  {
++    this.primaryKey = aPrimaryKey;
++  }
++
++
++  /**
++   * Sets the tep sensor id
++   *
++   * @param aTempSensorId the tempSensorId to set
++   */
++  public void setTempSensorId(String aTempSensorId)
++  {
++    this.tempSensorId = aTempSensorId;
++  }
++
++
++  /**
++   * Sets the usage
++   *
++   * @param aUsage the usage to set
++   */
++  public void setUsage(String aUsage)
++  {
++    this.usage = aUsage;
++  }
++}
+Index: src/main/java/nl/planon/pssm/frameui/engine/wicket/services/impl/BuildingService.java
+===================================================================
+RCS file: src/main/java/nl/planon/pssm/frameui/engine/wicket/services/impl/BuildingService.java
+diff -N src/main/java/nl/planon/pssm/frameui/engine/wicket/services/impl/BuildingService.java
+--- /dev/null	1 Jan 1970 00:00:00 -0000
++++ src/main/java/nl/planon/pssm/frameui/engine/wicket/services/impl/BuildingService.java	1 Jan 1970 00:00:00 -0000
+@@ -0,0 +1,180 @@
++// Planon Enterprise Edition Source file: BuildingService.java
++// Copyright Planon 1997-2014. All Rights Reserved.
++package nl.planon.pssm.frameui.engine.wicket.services.impl;
++
++import com.google.gson.internal.*;
++
++import java.util.*;
++
++import nl.planon.aphrodite.businessmodel.property.*;
++
++import nl.planon.hades.basevalue.*;
++import nl.planon.hades.businessmodel.*;
++import nl.planon.hades.businessobjectsmethod.*;
++import nl.planon.hades.businessobjectsmethod.boms.*;
++import nl.planon.hades.dto.*;
++import nl.planon.hades.exception.*;
++import nl.planon.hades.proxy.*;
++import nl.planon.hades.proxyview.*;
++
++import nl.planon.osgi.hades.connector.*;
++
++import nl.planon.pss.wicket.webservice.interfaces.*;
++
++import nl.planon.pssm.frameui.definition.proxyview.*;
++import nl.planon.pssm.frameui.engine.wicket.services.*;
++import nl.planon.pssm.frameui.engine.wicket.services.dto.*;
++
++/**
++ * BuildingService
++ */
++public class BuildingService extends PssWebServiceImpl implements IBuildingService
++{
++  //~ Methods --------------------------------------------------------------------------------------
++
++  /**
++   * {@inheritDoc}
++   */
++  public List<PropertyInformation> getAllProperties() throws PnErrorListException
++  {
++    List<PropertyInformation> retval = new ArrayList<PropertyInformation>();
++
++    PVType pVProperties = new PVType(IFrameUIPropertiesViewDefinition.PVTYPE);
++
++    IFOSearchCriteria sc = getEngineServiceLocator().getSearchCriteriaService().getPVSearchCriteria(pVProperties);
++
++//    sc.getOperator(IFrameUIPropertiesViewDefinition.PN_CITY, SCOperatorType.EQUAL).addValue("Breda");
++
++    IPagedProxyListValue plv = getEngineServiceLocator().getPagedProxyListHandlerService().createBySearchCriteria(sc);
++    System.out.println("Found: " + plv.getEstimatedRowCountFromDB());
++    IProxyValue pv = plv.getFirstProxyValue();
++    if (pv != null)
++    {
++      PropertyInformation information = new PropertyInformation();
++      information.setPrimaryKey(pv.getProxyItem(plv.getColumnNumberByAliasName(IFrameUIPropertiesViewDefinition.PN_PRIMARYKEY)).getAsString());
++      information.setCode(pv.getProxyItem(plv.getColumnNumberByAliasName(IFrameUIPropertiesViewDefinition.PN_CODE)).getAsString());
++      information.setName(pv.getProxyItem(plv.getColumnNumberByAliasName(IFrameUIPropertiesViewDefinition.PN_NAME)).getAsString());
++      information.setPhotoref(pv.getProxyItem(plv.getColumnNumberByAliasName(IFrameUIPropertiesViewDefinition.PN_PHOTOFILE_REF)).getAsString());
++      information.setComment(pv.getProxyItem(plv.getColumnNumberByAliasName(IFrameUIPropertiesViewDefinition.PN_COMMENT)).getAsString());
++      information.setUsage(pv.getProxyItem(plv.getColumnNumberByAliasName(IFrameUIPropertiesViewDefinition.PN_USAGE)).getAsString());
++      information.setGroundrent(pv.getProxyItem(plv.getColumnNumberByAliasName(IFrameUIPropertiesViewDefinition.PN_GROUNDRENT)).getAsString());
++      information.setAreabuilton(pv.getProxyItem(plv.getColumnNumberByAliasName(IFrameUIPropertiesViewDefinition.PN_AREABUILTON)).getAsString());
++      information.setCadastralNumbers(pv.getProxyItem(plv.getColumnNumberByAliasName(IFrameUIPropertiesViewDefinition.PN_CADASTRALNUMBERS)).getAsString());
++      information.setCadastralArea(pv.getProxyItem(plv.getColumnNumberByAliasName(IFrameUIPropertiesViewDefinition.PN_CADASTRALAREA)).getAsString());
++      information.setTempSensorId(pv.getProxyItem(plv.getColumnNumberByAliasName(IFrameUIPropertiesViewDefinition.PN_TEMPERATURESENSOR_ID)).getAsString());
++      retval.add(information);
++      pv = plv.getNextProxyValue();
++      while (pv != null)
++      {
++        information = new PropertyInformation();
++        information.setPrimaryKey(pv.getProxyItem(plv.getColumnNumberByAliasName(IFrameUIPropertiesViewDefinition.PN_PRIMARYKEY)).getAsString());
++        information.setCode(pv.getProxyItem(plv.getColumnNumberByAliasName(IFrameUIPropertiesViewDefinition.PN_CODE)).getAsString());
++        information.setName(pv.getProxyItem(plv.getColumnNumberByAliasName(IFrameUIPropertiesViewDefinition.PN_NAME)).getAsString());
++        information.setPhotoref(pv.getProxyItem(plv.getColumnNumberByAliasName(IFrameUIPropertiesViewDefinition.PN_PHOTOFILE_REF)).getAsString());
++        information.setComment(pv.getProxyItem(plv.getColumnNumberByAliasName(IFrameUIPropertiesViewDefinition.PN_COMMENT)).getAsString());
++        information.setUsage(pv.getProxyItem(plv.getColumnNumberByAliasName(IFrameUIPropertiesViewDefinition.PN_USAGE)).getAsString());
++        information.setGroundrent(pv.getProxyItem(plv.getColumnNumberByAliasName(IFrameUIPropertiesViewDefinition.PN_GROUNDRENT)).getAsString());
++        information.setAreabuilton(pv.getProxyItem(plv.getColumnNumberByAliasName(IFrameUIPropertiesViewDefinition.PN_AREABUILTON)).getAsString());
++        information.setCadastralNumbers(pv.getProxyItem(plv.getColumnNumberByAliasName(IFrameUIPropertiesViewDefinition.PN_CADASTRALNUMBERS)).getAsString());
++        information.setCadastralArea(pv.getProxyItem(plv.getColumnNumberByAliasName(IFrameUIPropertiesViewDefinition.PN_CADASTRALAREA)).getAsString());
++        information.setTempSensorId(pv.getProxyItem(plv.getColumnNumberByAliasName(IFrameUIPropertiesViewDefinition.PN_TEMPERATURESENSOR_ID)).getAsString());
++        retval.add(information);
++        pv = plv.getNextProxyValue();
++      }
++    }
++    return retval;
++  }
++
++
++  /**
++   * {@inheritDoc}
++   */
++  public List<PropertyInformation> putAllProperties(String aBoid, Object aProperty) throws PnErrorListException, BOMNotFoundException
++  {
++    LinkedTreeMap<String, String> property = (LinkedTreeMap<String, String>) aProperty;
++
++    String aAreabuilton = property.get("areabuilton");
++    String aCadastralArea = property.get("cadastralArea");
++    String aCadastralNumbers = property.get("cadastralNumbers");
++    String aGroundrent = property.get("groundrent");
++    String aName = property.get("name");
++
++    List<PropertyInformation> retval = new ArrayList<PropertyInformation>();
++
++    PVType pVProperties = new PVType(IFrameUIPropertiesViewDefinition.PVTYPE);
++
++    IFOSearchCriteria sc = getEngineServiceLocator().getSearchCriteriaService().getPVSearchCriteria(pVProperties);
++
++    IPagedProxyListValue plv = getEngineServiceLocator().getPagedProxyListHandlerService().createBySearchCriteria(sc);
++
++    IProxyValue pv = plv.getFirstProxyValue();
++    if (pv != null)
++    {
++      if (pv.getProxyItem(plv.getColumnNumberByAliasName(IFrameUIPropertiesViewDefinition.PN_PRIMARYKEY)).getAsString().equalsIgnoreCase(aBoid))
++      {
++        /*
++         * if we find the right bom here change and save it:
++         */
++        IBOType boType = pv.getBOType();
++
++        IBOMRead readBOM = getEngineServiceLocator().getBOMProcessingService().getBusinessObjectMethods(boType).getReadBOMEx();
++        int boidint = Integer.parseInt(pv.getProxyItem(plv.getColumnNumberByAliasName(IFrameUIPropertiesViewDefinition.PN_PRIMARYKEY)).getAsString());
++
++        readBOM.setPrimaryKeyValue(new BaseIntegerValue(boidint));
++        IFOValue boValue = getEngineServiceLocator().getBOMProcessingService().execute(readBOM);
++
++        try
++        {
++          boValue.getFieldByPnNameEx(IFrameUIPropertiesViewDefinition.PN_NAME).setAsBaseValue(new BaseStringValue(aName));
++          boValue.getFieldByPnNameEx(IFrameUIPropertiesViewDefinition.PN_AREABUILTON).setAsBaseValue(new BaseBigDecimalValue(aAreabuilton));
++          boValue.getFieldByPnNameEx(IFrameUIPropertiesViewDefinition.PN_CADASTRALAREA).setAsBaseValue(new BaseBigDecimalValue(aCadastralArea));
++          boValue.getFieldByPnNameEx(IFrameUIPropertiesViewDefinition.PN_CADASTRALNUMBERS).setAsBaseValue(new BaseStringValue(aCadastralNumbers));
++          boValue.getFieldByPnNameEx(IFrameUIPropertiesViewDefinition.PN_GROUNDRENT).setAsBaseValue(new BaseBigDecimalValue(aGroundrent));
++        }
++        catch (FieldNotFoundException ex)
++        {
++          ex.printStackTrace();
++        }
++
++        IBOM saveBom = boValue.getBOMListManager().getBOMByPnNameEx(BOPropertyDef.PN_BOM_SAVE);
++        boValue = getEngineServiceLocator().getBOMProcessingService().execute(saveBom);
++      }
++
++      pv = plv.getNextProxyValue();
++      while (pv != null)
++      {
++        if (pv.getProxyItem(plv.getColumnNumberByAliasName(IFrameUIPropertiesViewDefinition.PN_PRIMARYKEY)).getAsString().equalsIgnoreCase(aBoid))
++        {
++          /*
++           * if we find the right bom here change and save it:
++           */
++          IBOType boType = pv.getBOType();
++
++          IBOMRead readBOM = getEngineServiceLocator().getBOMProcessingService().getBusinessObjectMethods(boType).getReadBOMEx();
++          int boidint = Integer.parseInt(pv.getProxyItem(plv.getColumnNumberByAliasName(IFrameUIPropertiesViewDefinition.PN_PRIMARYKEY)).getAsString());
++
++          readBOM.setPrimaryKeyValue(new BaseIntegerValue(boidint));
++          IFOValue boValue = getEngineServiceLocator().getBOMProcessingService().execute(readBOM);
++
++          try
++          {
++            boValue.getFieldByPnNameEx(IFrameUIPropertiesViewDefinition.PN_NAME).setAsBaseValue(new BaseStringValue(aName));
++            boValue.getFieldByPnNameEx(IFrameUIPropertiesViewDefinition.PN_AREABUILTON).setAsBaseValue(new BaseBigDecimalValue(aAreabuilton));
++            boValue.getFieldByPnNameEx(IFrameUIPropertiesViewDefinition.PN_CADASTRALAREA).setAsBaseValue(new BaseBigDecimalValue(aCadastralArea));
++            boValue.getFieldByPnNameEx(IFrameUIPropertiesViewDefinition.PN_CADASTRALNUMBERS).setAsBaseValue(new BaseStringValue(aCadastralNumbers));
++            boValue.getFieldByPnNameEx(IFrameUIPropertiesViewDefinition.PN_GROUNDRENT).setAsBaseValue(new BaseBigDecimalValue(aGroundrent));
++          }
++          catch (FieldNotFoundException ex)
++          {
++            ex.printStackTrace();
++          }
++
++          IBOM saveBom = boValue.getBOMListManager().getBOMByPnNameEx(BOPropertyDef.PN_BOM_SAVE);
++          boValue = getEngineServiceLocator().getBOMProcessingService().execute(saveBom);
++        }
++        pv = plv.getNextProxyValue();
++      }
++    }
++    return retval;
++  }
++}

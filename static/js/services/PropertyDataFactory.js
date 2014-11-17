@@ -65,11 +65,23 @@ app.factory('PropertyData', function($http, $q, config, propertyCache) {
           return $q.reject(response.data);
       });
     },
-    updateProperty: function(id, name) {
-      var arguments    = [id, name];
+    updateProperty: function(id, property) {
+      //Added a 'cast to string' in order to get the webservice interface right
+      saveObject = {
+        "areabuilton":      ""+property.areabuilton,
+        "cadastralArea":    ""+property.cadastralArea,
+        "cadastralNumbers": ""+property.cadastralNumbers,
+        "groundrent":       ""+property.groundrent,
+        "name":             property.name
+      }
+      console.log('saveObject', JSON.stringify(saveObject));
+      var arguments    = [id, JSON.stringify(saveObject)];
       return $http.post(config.baseUrl + config.serviceUrl, {method:config.executeMethodSave, args: arguments}).
         then(function(response) {
           if (typeof response.data === 'object') {
+            propertyCache.put('properties.list', response.data.result);
+            //after succesfull change a cacherefresh is due
+            propertyCache.put('properties.ts', 0);
             return response.data;
           } else {
             // invalid response
@@ -83,3 +95,4 @@ app.factory('PropertyData', function($http, $q, config, propertyCache) {
 
   };
 });
+

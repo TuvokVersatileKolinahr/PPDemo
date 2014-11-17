@@ -1,7 +1,7 @@
 /**
  * EditController. Responsible fot the 'editview'.
  */
-app.controller('EditController', function($scope, $http, config, $routeParams, PropertyData){
+app.controller('EditController', function($scope, $http, config, $routeParams, PropertyData, $location){
 
   /** --- local variables --- **/
   $scope.propertyId = $routeParams.propertyId;
@@ -34,9 +34,15 @@ app.controller('EditController', function($scope, $http, config, $routeParams, P
    * @param Object the property
    */
   $scope.update = function(property) {
-    PropertyData.updateProperty($scope.selected.primaryKey, "\""+$scope.selected.name+"\"")
+    //"\""+$scope.selected.name+"\""
+    PropertyData.updateProperty($scope.selected.primaryKey, property)
       .then(function(data) {
         // promise fulfilled
+        if (data.result.length === 0) { //there is no error
+          $scope.properties = data.result;
+          $location.path( "#/properties" );
+          // $window.location.href = '#/properties';
+        }
       }, function(error) {
         console.error("Error fetching properties", error);
       });
