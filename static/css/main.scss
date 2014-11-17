@@ -212,6 +212,7 @@ header{
 .graph {
   font: $secundairy-font;
   font-size: $font-size-h4;
+  height: 200px;
   
   rect {
     fill: $selected-color;

@@ -28,8 +28,8 @@ function getTempGraph (data_url) {
       .y(function(d) { return y(d.temp); });
 
   var svg = d3.select(".graph").append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
+      .attr("width", "100%")
+      .attr("height", "100%")
     .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
