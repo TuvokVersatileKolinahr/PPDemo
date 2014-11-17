@@ -74,10 +74,11 @@ app.factory('PropertyData', function($http, $q, config, propertyCache) {
         "name":             property.name
       }
       var arguments    = [id, JSON.stringify(saveObject)];
+
         if (config.localdev) {
           propertiesList = propertyCache.get('properties.list');
           propertiesList.result.forEach(function(p){
-            if (p.code === id){
+            if (p.code === property.code){
               console.log('p', p);
             }
           });

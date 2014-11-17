@@ -1,7 +1,7 @@
 /**
  * MainController. Responsible fot the 'mapview'.
  */
-app.controller('MainController', function($scope, $http, config, PropertyData, MapService){
+app.controller('MainController', function($scope, PropertyData, MapService, TemperatureDataService){
 
   /** --- local variables --- **/
 
@@ -72,13 +72,7 @@ app.controller('MainController', function($scope, $http, config, PropertyData, M
       });
       console.log('Zoom to marker ' + id);
       if ($scope.showInfo) {
-        removeTempGraph();
-        console.log("Fetch temperature data selectMarker");
-        if (config.localdev) {
-          getTempGraph('static/js/temperaturedata.js?t_id=' + $scope.selected.tempSensorId);
-        } else {
-          getTempGraph('/sensors/' + $scope.selected.tempSensorId + '/readings/temp');
-        }
+        TemperatureDataService.insertGraph($scope.selected.tempSensorId);
       }
     }
     return marker;
@@ -91,7 +85,7 @@ app.controller('MainController', function($scope, $http, config, PropertyData, M
    */
   $scope.selectMarkerWithInfo = function(id){
     if ($scope.selectMarker(id)){
-      console.log("Fetch temperature data selectMarkerWithInfo");
+      console.log("Switch the info panel");
       $scope.showInfo = !$scope.showInfo;
     }
   }

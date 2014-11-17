@@ -1,7 +1,7 @@
 /**
  * EditController. Responsible fot the 'editview'.
  */
-app.controller('EditController', function($scope, $http, config, $routeParams, PropertyData, $location){
+app.controller('EditController', function($scope, $routeParams, PropertyData, $location){
 
   /** --- local variables --- **/
   $scope.propertyId = $routeParams.propertyId;

@@ -1,7 +1,7 @@
 
 // var data_url = 'static/js/temperaturedata.js';
 
-function getTempGraph (data_url) {
+function getTempGraph (data_url, graph_element) {
   var margin = {top: 20, right: 20, bottom: 30, left: 50},
       width = 400 - margin.left - margin.right,
       height = 200 - margin.top - margin.bottom;
@@ -27,7 +27,7 @@ function getTempGraph (data_url) {
       .x(function(d) { return x(d.time); })
       .y(function(d) { return y(d.temp); });
 
-  var svg = d3.select(".graph").append("svg")
+  var svg = d3.select(graph_element).append("svg")
       .attr("width", "100%")
       .attr("height", "100%")
     .append("g")
