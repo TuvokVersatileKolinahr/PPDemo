@@ -51,7 +51,6 @@ app.factory('PropertyData', function($http, $q, config, propertyCache) {
             for(var i=0; i < response.data.result.length; i++) {
               response.data.result[i].photoref = _fixPhotoRef(response.data.result[i].photoref);
             }
-            console.log("Return from http");
             //update the cache
             propertyCache.put('properties.list', response.data)
             propertyCache.put('properties.ts', Date.now())
@@ -74,23 +73,39 @@ app.factory('PropertyData', function($http, $q, config, propertyCache) {
         "groundrent":       ""+property.groundrent,
         "name":             property.name
       }
-      console.log('saveObject', JSON.stringify(saveObject));
       var arguments    = [id, JSON.stringify(saveObject)];
-      return $http.post(config.baseUrl + config.serviceUrl, {method:config.executeMethodSave, args: arguments}).
-        then(function(response) {
-          if (typeof response.data === 'object') {
-            propertyCache.put('properties.list', response.data.result);
-            //after succesfull change a cacherefresh is due
-            propertyCache.put('properties.ts', 0);
-            return response.data;
-          } else {
-            // invalid response
-            return $q.reject(response.data);
+        if (config.localdev) {
+          propertiesList = propertyCache.get('properties.list');
+          propertiesList.forEach(function(p){
+            if (p.code === id){
+              console.log('p', p);
+            }
+          });
+
+          // fake success response
+          response = {
+            data: {
+              result: []
+            }
           }
-        }, function(response) {
-          // something went wrong
-          return $q.reject(response.data);
-        });
+          return $q.all(response.data);
+        } else {
+          return $http.post(config.baseUrl + config.serviceUrl, {method:config.executeMethodSave, args: arguments}).
+            then(function(response) {
+              if (typeof response.data === 'object') {
+                propertyCache.put('properties.list', response.data.result);
+                //after succesfull change a cacherefresh is due
+                propertyCache.put('properties.ts', 0);
+                return response.data;
+              } else {
+                // invalid response
+                return $q.reject(response.data);
+              }
+            }, function(response) {
+              // something went wrong
+              return $q.reject(response.data);
+            });
+        }
     }
 
   };

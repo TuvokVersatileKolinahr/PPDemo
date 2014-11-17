@@ -39,9 +39,7 @@ app.controller('EditController', function($scope, $http, config, $routeParams, P
       .then(function(data) {
         // promise fulfilled
         if (data.result.length === 0) { //there is no error
-          $scope.properties = data.result;
           $location.path( "#/properties" );
-          // $window.location.href = '#/properties';
         }
       }, function(error) {
         console.error("Error fetching properties", error);
