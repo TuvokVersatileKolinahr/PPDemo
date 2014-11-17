@@ -76,7 +76,7 @@ app.factory('PropertyData', function($http, $q, config, propertyCache) {
       var arguments    = [id, JSON.stringify(saveObject)];
         if (config.localdev) {
           propertiesList = propertyCache.get('properties.list');
-          propertiesList.forEach(function(p){
+          propertiesList.result.forEach(function(p){
             if (p.code === id){
               console.log('p', p);
             }
