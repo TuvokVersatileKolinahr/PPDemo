@@ -10,7 +10,12 @@ gulp.task('js', function(){
  return gulp.src('static/js/*.js')
   .pipe(concat('all.min.js'))
   .pipe(uglify())
-  .pipe(gulp.dest('static/js'));
+  .pipe(gulp.dest('static/js')); 
+});
+
+gulp.task('script', function(){
+  return gulp.src("static/js/**/*.js")
+     .pipe(reload({stream:true}));
 });
 
 gulp.task('sass', function(){
@@ -19,6 +24,11 @@ gulp.task('sass', function(){
         .pipe(minifyCSS())
         .pipe(gulp.dest('static/css'))
         .pipe(reload({stream:true}));
+});
+
+gulp.task('image', function(){
+  return gulp.src("static/img/**/*")
+     .pipe(reload({stream:true}));
 });
 
 // browser-sync task for starting the server.
@@ -43,5 +53,7 @@ gulp.task('browser-sync', function() {
 
 // Default task to be run with `gulp`
 gulp.task('watch', ['sass', 'browser-sync'], function () {
-    gulp.watch("static/css/*.scss", ['sass']);
+    gulp.watch("static/css/**/*.scss", ['sass']);
+    gulp.watch("static/js/**/*.js", ['script']);
+    gulp.watch('static/img/**/*', ['image']);
 });
