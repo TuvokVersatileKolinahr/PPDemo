@@ -24,16 +24,20 @@ gulp.task('sass', function(){
 // browser-sync task for starting the server.
 gulp.task('browser-sync', function() {
     return browserSync({
-        server: {
-            baseDir: "./"
-        },
-        ghostMode: {
-		    clicks: true,
-		    location: true,
-		    forms: true,
-		    scroll: true
-		},
-		open: "external"
+      server: {
+          baseDir: "./"
+      },
+      ghostMode: {
+  	    clicks: true,
+  	    location: true,
+  	    forms: true,
+  	    scroll: true
+  		},
+  		open: "external",
+      injectChanges: true, // inject CSS changes (false force a reload) 
+      browser: ["google chrome"],
+      scrollProportionally: true, // Sync viewports to TOP position
+      scrollThrottle: 50,
     });
 });
 
