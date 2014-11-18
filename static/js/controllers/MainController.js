@@ -99,8 +99,8 @@ app.controller('MainController', function($scope, PropertyData, MapService, Temp
    *
    * @param string The id of the marker
    */
-  $scope.clear = function(event){
-    $scope.showInfo = false;
+  $scope.toggleDetails = function(event){
+    $scope.showInfo = !$scope.showInfo && $scope.selected;
     if(event){
       event.stopPropagation();
       event.preventDefault();

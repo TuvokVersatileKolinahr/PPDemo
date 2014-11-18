@@ -83,21 +83,37 @@ header{
   &.open {
     margin-left: 75%;
     padding-left: 0; /* remove border when open */
+
+    .handle{
+      opacity: 1;
+      transform: rotate(0deg);
+    }
   }
-  .close{
-      display: none;
-  
+  .handle{
+    background: $background-color url(../img/handle.png) no-repeat center center;
+    border-radius: 2px 0 0 2px;
+    box-shadow: -2px 0 4px 0 rgba(0, 0, 0, 0.3);
+    font-weight: bold;
+    height: 25px;
+    left: -16px;
+    opacity: .5;
+    position: absolute;
+    top: 155px;
+    transform: rotate(180deg);
+    transition: all .5s ease-in 0;
+    width: 16px;
+
     &:hover{
       opacity: 1;
     }
-  }
-  &.open .close{
-    display: inline;
-    font-size: $font-size;
-    opacity: .5;
-    padding-left: 4px;
-    text-decoration: none;
-    transition: all .3s ease-out 0s;
+    .close{
+      display: block;
+      font-size: $font-size;
+      height: 100%;
+      padding-left: 4px;
+      text-decoration: none;
+      transition: all .3s ease-out 0s;
+    }
   }
   
   .header{
@@ -109,17 +125,7 @@ header{
     top: 44px;
     width: 100%;
   }
-  .handle{
-    background-color: $background-color;
-    border-radius: 2px 0 0 2px;
-    box-shadow: -2px 0 4px 0 rgba(0, 0, 0, 0.3);
-    font-weight: bold;
-    left: -17px;
-    padding: 2px;
-    position: absolute;
-    top: 155px;
-  }
-  .field .label{
+  .field .label{ 
     width: 40%;
   }
   .img-holder{
