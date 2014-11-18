@@ -6,25 +6,21 @@ app.controller('EditController', function($scope, $routeParams, PropertyData, $l
   /** --- local variables --- **/
   $scope.propertyId = $routeParams.propertyId;
 
-  var propertyPromise = function() {
-    PropertyData.getProperties()
-      .then(function(data) {
-        // promise fulfilled
-        if (data.result.length > 0) {
-          // Find the selected property
-          data.result.forEach(function(p){
-            if (p.code === $scope.propertyId){
-              $scope.selected = p;
-            }
-          });
-        } else {
-          console.log("Received no properties.");
-        }
-      }, function(error) {
-        console.error("Error fetching properties", error);
-      });
-  };
-  propertyPromise();
+  /**
+   * Initilizes the view.
+   * retrieves the selected property from the central cached list.
+   */
+  PropertyData.getProperty($scope.propertyId)
+    .then(function(data) {
+      // promise fulfilled
+      if (data) {
+        $scope.selected = data;
+      } else {
+        console.log("Received no property.");
+      }
+    }, function(error) {
+      console.error("Error fetching properties", error);
+    });
 
   /** --- public methods --- **/
 
@@ -34,7 +30,6 @@ app.controller('EditController', function($scope, $routeParams, PropertyData, $l
    * @param Object the property
    */
   $scope.update = function(property) {
-    //"\""+$scope.selected.name+"\""
     PropertyData.updateProperty($scope.selected.primaryKey, property)
       .then(function(data) {
         // promise fulfilled
@@ -42,7 +37,7 @@ app.controller('EditController', function($scope, $routeParams, PropertyData, $l
           $location.path( "#/properties" );
         }
       }, function(error) {
-        console.error("Error fetching properties", error);
+        console.error("Error updating properties", error);
       });
   };
 

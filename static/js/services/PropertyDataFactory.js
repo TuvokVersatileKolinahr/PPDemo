@@ -36,6 +36,11 @@ app.factory('PropertyData', function($http, $q, config, propertyCache) {
       if (propCache && (Date.now() - propertyCache.get('properties.ts') < config.cache_refresh )) {
         //we have a cached version of the properties & cache is less than 'config.cache_refresh' old
         console.log("Return from cache");
+        if (config.localdev) {
+          //indicate that the cache is still valid
+          propertyCache.put('properties.ts', Date.now());
+        }
+        // return the promise
         return $q.when(propCache);
       } else { //we need to fetch the properties
         if (config.localdev) {
@@ -49,16 +54,8 @@ app.factory('PropertyData', function($http, $q, config, propertyCache) {
       return propertiesList.then(function(response) {
           if (typeof response.data === 'object') {
             var propertiesList = response.data;
-            var propertyUpdated = propertyCache.get('properties.updated');
-
             for(var i=0; i < propertiesList.result.length; i++) {
               propertiesList.result[i].photoref = _fixPhotoRef(propertiesList.result[i].photoref);
-              if (propertyUpdated) {
-                //we have an updated property
-                if (propertiesList.result[i].code === propertyUpdated){
-                  console.log('p', p);
-                }
-              }
             }
 
             //update the cache
@@ -74,6 +71,26 @@ app.factory('PropertyData', function($http, $q, config, propertyCache) {
           return $q.reject(response.data);
       });
     },
+    getProperty: function(code) {
+      var propCache = propertyCache.get('properties.list');
+      var retval;
+      for(var i=0; i < propCache.result.length; i++) {
+        var p = propCache.result[i];
+        if (p.code === code){
+          // save this item as the selected one
+          p.selected = true;
+          retval = p;
+        } else {
+          //make sure selected is false
+          p.selected = false;
+        }
+        // and put the 'enhanced version' back in the cache for later use
+        propCache.result[i] = p;
+      }
+      propertyCache.put('properties.list', propCache);
+      // return the promise
+      return $q.all(retval);
+    },
     updateProperty: function(id, property) {
       //Added a 'cast to string' in order to get the webservice interface right
       saveObject = {
@@ -83,17 +100,16 @@ app.factory('PropertyData', function($http, $q, config, propertyCache) {
         "groundrent":       ""+property.groundrent,
         "name":             property.name
       }
-      var arguments    = [id, JSON.stringify(saveObject)];
-      propertyCache.put('properties.updated', property.code);
-        if (config.localdev) {
-          propertiesList = propertyCache.get('properties.list');
+      var arguments = [id, JSON.stringify(saveObject)];
 
-          // fake success response
+        if (config.localdev) {
+          // mock success response
           response = {
             data: {
               result: []
             }
-          }
+          };
+          //return the promise
           return $q.all(response.data);
         } else {
           return $http.post(config.baseUrl + config.serviceUrl, {method:config.executeMethodSave, args: arguments}).
