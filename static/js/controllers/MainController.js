@@ -84,10 +84,8 @@ app.controller('MainController', function($scope, PropertyData, MapService, Temp
    * @param string The id of the marker
    */
   $scope.selectMarkerWithInfo = function(id){
-    if ($scope.selectMarker(id)){
-      console.log("Switch the info panel");
-      $scope.showInfo = !$scope.showInfo;
-    }
+    $scope.showInfo = true;
+    $scope.selectMarker(id);
   }
 
   /**
