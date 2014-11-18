@@ -48,13 +48,23 @@ app.factory('PropertyData', function($http, $q, config, propertyCache) {
       // When our $http promise resolves
       return propertiesList.then(function(response) {
           if (typeof response.data === 'object') {
-            for(var i=0; i < response.data.result.length; i++) {
-              response.data.result[i].photoref = _fixPhotoRef(response.data.result[i].photoref);
+            var propertiesList = response.data;
+            var propertyUpdated = propertyCache.get('properties.updated');
+
+            for(var i=0; i < propertiesList.result.length; i++) {
+              propertiesList.result[i].photoref = _fixPhotoRef(propertiesList.result[i].photoref);
+              if (propertyUpdated) {
+                //we have an updated property
+                if (propertiesList.result[i].code === propertyUpdated){
+                  console.log('p', p);
+                }
+              }
             }
+
             //update the cache
-            propertyCache.put('properties.list', response.data)
+            propertyCache.put('properties.list', propertiesList)
             propertyCache.put('properties.ts', Date.now())
-            return response.data;
+            return propertiesList;
           } else {
             // invalid response
             return $q.reject(response.data);
@@ -74,14 +84,9 @@ app.factory('PropertyData', function($http, $q, config, propertyCache) {
         "name":             property.name
       }
       var arguments    = [id, JSON.stringify(saveObject)];
-
+      propertyCache.put('properties.updated', property.code);
         if (config.localdev) {
           propertiesList = propertyCache.get('properties.list');
-          propertiesList.result.forEach(function(p){
-            if (p.code === property.code){
-              console.log('p', p);
-            }
-          });
 
           // fake success response
           response = {
