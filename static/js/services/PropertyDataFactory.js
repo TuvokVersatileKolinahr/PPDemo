@@ -56,6 +56,9 @@ app.factory('PropertyData', function($http, $q, config, propertyCache) {
             var propertiesList = response.data;
             for(var i=0; i < propertiesList.result.length; i++) {
               propertiesList.result[i].photoref = _fixPhotoRef(propertiesList.result[i].photoref);
+              if(propertiesList.result[i].code === propertyCache.get('properties.updated')) {
+                propertiesList.result[i].selected = true;
+              }
             }
 
             //update the cache
@@ -79,6 +82,7 @@ app.factory('PropertyData', function($http, $q, config, propertyCache) {
         if (p.code === code){
           // save this item as the selected one
           p.selected = true;
+          propertyCache.put('properties.updated', code);
           retval = p;
         } else {
           //make sure selected is false
@@ -115,9 +119,20 @@ app.factory('PropertyData', function($http, $q, config, propertyCache) {
           return $http.post(config.baseUrl + config.serviceUrl, {method:config.executeMethodSave, args: arguments}).
             then(function(response) {
               if (typeof response.data === 'object') {
-                propertyCache.put('properties.list', response.data.result);
+                // propertyCache.put('properties.list', response.data.result);
                 //after succesfull change a cacherefresh is due
                 propertyCache.put('properties.ts', 0);
+                // var propCache = propertyCache.get('properties.list');
+                // for(var i=0; i < propCache.result.length; i++) {
+                //   var p = propCache.result[i];
+                //   if (p.selected){
+                //     propCache.result[i] = property;
+                //     propCache.result[i].selected = true;
+                //   }
+                //   propCache.result[i] = p;
+                // }
+                // propertyCache.put('properties.ts', Date.now());
+                // propertyCache.put('properties.list', propCache);
                 return response.data;
               } else {
                 // invalid response
