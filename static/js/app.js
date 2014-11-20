@@ -1,8 +1,8 @@
 angular.module('propertypassport.config',[])
   .constant('config', {
     'version': 0.2,
-    'localdev': false,
-    'baseUrl': 'http://pc06698',
+    'localdev': true,
+    'baseUrl': 'http://localhost:8070',
     'serviceUrl': '/REST/FrameUI/demo/demo_webclient/BuildingService',
     'executeMethodGetList': 'getAllProperties',
     'executeMethodSave': 'putAllProperties',
